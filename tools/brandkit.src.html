@@ -969,6 +969,13 @@ pre.prompt{background:var(--sunk);border:1px solid var(--line);border-radius:16p
         </div>
       </div>
       <div class="block">
+        <div class="bh"><h3>Master canvas sizes</h3><p>Core production sizes for organic posts, vertical content, videos, ads and platform banners. Start every design from one of these.</p><div style="margin-top:16px"><button class="btn btn-ghost btn-sm" type="button" data-dl-doc>Download .docx</button></div></div>
+        <div class="bc"><div class="tbl-wrap"><table>
+          <thead><tr><th>Shape</th><th>Canvas size</th><th>Ratio</th><th>Best use</th></tr></thead>
+          <tbody><tr><td style="width:84px"><span aria-hidden="true" style="display:inline-block;width:27px;height:34px;border:2px solid var(--ink);border-radius:3px;vertical-align:middle"></span></td><td><b style="white-space:nowrap;font-variant-numeric:tabular-nums">1080 × 1350</b></td><td>4:5</td><td>Portrait feed posts and ads across Instagram, Facebook, LinkedIn and Threads</td></tr><tr><td style="width:84px"><span aria-hidden="true" style="display:inline-block;width:19px;height:34px;border:2px solid var(--ink);border-radius:3px;vertical-align:middle"></span></td><td><b style="white-space:nowrap;font-variant-numeric:tabular-nums">1080 × 1920</b></td><td>9:16</td><td>Reels, Stories, Shorts, TikTok, Snapchat and WhatsApp Status</td></tr><tr><td style="width:84px"><span aria-hidden="true" style="display:inline-block;width:26px;height:34px;border:2px solid var(--ink);border-radius:3px;vertical-align:middle"></span></td><td><b style="white-space:nowrap;font-variant-numeric:tabular-nums">1440 × 1920</b></td><td>3:4</td><td>Instagram organic photos and Threads portrait posts</td></tr><tr><td style="width:84px"><span aria-hidden="true" style="display:inline-block;width:60px;height:31px;border:2px solid var(--ink);border-radius:3px;vertical-align:middle"></span></td><td><b style="white-space:nowrap;font-variant-numeric:tabular-nums">1200 × 628</b></td><td>1.91:1</td><td>LinkedIn ads, website link previews and landscape ads</td></tr><tr><td style="width:84px"><span aria-hidden="true" style="display:inline-block;width:60px;height:34px;border:2px solid var(--ink);border-radius:3px;vertical-align:middle"></span></td><td><b style="white-space:nowrap;font-variant-numeric:tabular-nums">1920 × 1080</b></td><td>16:9</td><td>YouTube videos, landscape videos and video ads</td></tr><tr><td style="width:84px"><span aria-hidden="true" style="display:inline-block;width:23px;height:34px;border:2px solid var(--ink);border-radius:3px;vertical-align:middle"></span></td><td><b style="white-space:nowrap;font-variant-numeric:tabular-nums">1000 × 1500</b></td><td>2:3</td><td>Pinterest standard Pins, video Pins and Pinterest ads</td></tr><tr><td style="width:84px"><span aria-hidden="true" style="display:inline-block;width:60px;height:34px;border:2px solid var(--ink);border-radius:3px;vertical-align:middle"></span></td><td><b style="white-space:nowrap;font-variant-numeric:tabular-nums">2560 × 1440</b></td><td>16:9</td><td>YouTube channel banner</td></tr></tbody>
+        </table></div></div>
+      </div>
+      <div class="block">
         <div class="bh"><h3>Platform specs</h3><p>Sizes and posting cadence per platform.</p></div>
         <div class="bc"><div class="tbl-wrap"><table>
           <thead><tr><th>Platform</th><th>Role</th><th>Feed sizes</th><th>Other sizes</th><th>Cadence</th></tr></thead>
@@ -1298,10 +1305,15 @@ async function dlLogo(id, fmt){
 }
 document.addEventListener('click',e=>{ const b=e.target.closest('[data-dl]'); if(b) dlLogo(b.dataset.dl, b.dataset.fmt); });
 
-function b64(s){ const bin=atob(s); const u=new Uint8Array(bin.length); for(let i=0;i<bin.length;i++)u[i]=bin.charCodeAt(i); return new Blob([u],{type:'image/png'}); }
+function b64(s,t){ const bin=atob(s); const u=new Uint8Array(bin.length); for(let i=0;i<bin.length;i++)u[i]=bin.charCodeAt(i); return new Blob([u],{type:t||'image/png'}); }
+const DOCX='Master_Social_Media_Canvas_Sizes.docx';
+const dlDoc=()=>saveFile(DOCX,b64(BRAND_ASSETS.docs[DOCX],'application/vnd.openxmlformats-officedocument.wordprocessingml.document'));
+$$('[data-dl-doc]').forEach(b=>b.addEventListener('click',dlDoc));
 const FILES=[...LOGOS.map(l=>({n:l.name,s:l.use,acts:[['SVG',()=>dlLogo(l.id,'svg')],['PNG',()=>dlLogo(l.id,'png')]]})),
  {n:'Colour tokens',s:'CSS custom properties and JSON for developers and Figma plugins',acts:[['CSS',()=>saveFile('fastex-tokens.css',TOKENS_CSS,'text/css')],['JSON',()=>saveFile('fastex-tokens.json',TOKENS_JSON,'application/json')]]},
- ...Object.keys(BRAND_ASSETS.originals).map(k=>({n:'Original artwork · '+k,s:'The 616 px PNG master as supplied',acts:[['PNG',()=>saveFile(k,b64(BRAND_ASSETS.originals[k]),'image/png')]]}))];
+ ...Object.keys(BRAND_ASSETS.originals).map(k=>({n:'Original artwork · '+k,s:'The 616 px PNG master as supplied',acts:[['PNG',()=>saveFile(k,b64(BRAND_ASSETS.originals[k]),'image/png')]]})),
+ {n:'Master social media canvas sizes',s:'Word document with the 7 core production sizes',acts:[['DOCX',dlDoc]]},
+ {n:'Post design rules',s:'Variable template for static posts and carousels',acts:[['MD',()=>saveFile('Brand-Design-Rules-Variable-Template.md',RULES,'text/markdown')]]}];
 const fl=$('#files');
 FILES.forEach(f=>{ const row=document.createElement('div'); row.className='file'; row.innerHTML=`<div><b>${f.n}</b><small>${f.s}</small></div><div class="acts"></div>`; f.acts.forEach(([lbl,fn])=>{ const b=document.createElement('button'); b.type='button'; b.className='chip'; b.innerHTML=DL_ICON+lbl; b.addEventListener('click',fn); row.lastElementChild.appendChild(b); }); fl.appendChild(row); });
 
@@ -1315,6 +1327,7 @@ async function zipAll(btn){
     z.file('tokens/fastex-tokens.css', TOKENS_CSS); z.file('tokens/fastex-tokens.json', TOKENS_JSON);
     z.file('BRANDKIT_PROMPT.md', PROMPT);
     z.file('Brand-Design-Rules-Variable-Template.md', RULES);
+    for(const k of Object.keys(BRAND_ASSETS.docs||{})) z.file('docs/'+k, BRAND_ASSETS.docs[k], {base64:true});
     z.file('README.txt', 'Fastex Media brand kit v1.0\n\nsvg/  vector logos (use these whenever possible)\npng/  raster logos at '+size+' px\noriginal/  artwork as supplied\ntokens/  colours and fonts for developers\n\nFonts: Outfit and Inter, free at fonts.google.com\nQuestions: hello@fastexmedia.com\n');
     const blob=await z.generateAsync({type:'blob'});
     await saveFile('fastex-media-brand-kit.zip', blob, 'application/zip');

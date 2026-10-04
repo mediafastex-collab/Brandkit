@@ -108,7 +108,14 @@ for name in ("fx-mark-light.png", "fx-mark-dark-badge.png"):
     if p.exists():
         originals[name] = base64.b64encode(p.read_bytes()).decode()
 
+docs = {}
+for name in ("Master_Social_Media_Canvas_Sizes.docx",):
+    p = ROOT / name
+    if p.exists():
+        docs[name] = base64.b64encode(p.read_bytes()).decode()
+
 data = {
+    "docs": docs,
     "logos": [dict(id=i, name=n, use=u, svg=s, bg=b) for i, n, u, s, b in LOGOS],
     "originals": originals,
 }
