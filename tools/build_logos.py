@@ -117,7 +117,7 @@ blob = "const BRAND_ASSETS = " + json.dumps(data, separators=(",", ":")) + ";"
 src = (ROOT / "tools" / "brandkit.src.html").read_text()
 import html
 prompt = (ROOT / "BRANDKIT_PROMPT.md").read_text()
-page = src.replace("/*__BRAND_ASSETS__*/", blob).replace("<!--__PROMPT__-->", html.escape(prompt, quote=False))
+page = src.replace("/*__BRAND_ASSETS__*/", blob).replace("<!--__PROMPT__-->", html.escape(prompt, quote=False)).replace("<!--__RULES__-->", html.escape((ROOT / "Brand-Design-Rules-Variable-Template.md").read_text(), quote=False))
 (ROOT / "brandkit.html").write_text(page)  # body-only page, published as the Artifact
 (ROOT / "index.html").write_text(
     '<!doctype html>\n<html lang="en">\n<head>\n<meta charset="utf-8">\n'

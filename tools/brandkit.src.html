@@ -1074,14 +1074,14 @@ pre.prompt{background:var(--sunk);border:1px solid var(--line);border-radius:16p
 
 <!-- ================= RESOURCES ================= -->
 <section class="page" data-page="resources" hidden>
-  <div class="wrap phero"><p class="eyebrow">Resources</p><h1>Files and prompt</h1><p class="lede">Every logo as SVG and PNG, the colour tokens, the original artwork and the prompt used to build this kit.</p></div>
-  <nav class="tabs" aria-label="Resource sections"><div class="wrap"><a href="#resources-downloads" data-sub="downloads">Downloads</a><a href="#resources-prompt" data-sub="prompt">Master prompt</a></div></nav>
+  <div class="wrap phero"><p class="eyebrow">Resources</p><h1>Files and prompts</h1><p class="lede">Every logo as SVG and PNG, the colour tokens, the original artwork, the prompt used to build this kit and the post design rules.</p></div>
+  <nav class="tabs" aria-label="Resource sections"><div class="wrap"><a href="#resources-downloads" data-sub="downloads">Downloads</a><a href="#resources-prompt" data-sub="prompt">Prompts</a></div></nav>
   <div class="wrap">
     <div class="subp" data-sub="downloads">
       <div class="block">
         <div class="bh"><h3>Full brand kit</h3><p>Everything in one ZIP.</p></div>
         <div class="bc">
-          <div class="dl-hero"><div class="band"></div><div><h3>fastex-media-brand-kit.zip</h3><p>10 SVG logos, 10 PNGs at the size you pick, the original artwork, CSS and JSON colour tokens, and the master prompt.</p></div><button class="btn btn-orange" type="button" data-zip>Download ZIP</button></div>
+          <div class="dl-hero"><div class="band"></div><div><h3>fastex-media-brand-kit.zip</h3><p>10 SVG logos, 10 PNGs at the size you pick, the original artwork, CSS and JSON colour tokens, the master prompt and the post design rules.</p></div><button class="btn btn-orange" type="button" data-zip>Download ZIP</button></div>
           <div class="toolbar" style="margin:16px 0 0"><label for="pngSize2">PNG size <select id="pngSize2" data-size><option value="512">512 px</option><option value="1024">1024 px</option><option value="2048" selected>2048 px</option><option value="4096">4096 px</option></select></label></div>
         </div>
       </div>
@@ -1094,6 +1094,10 @@ pre.prompt{background:var(--sunk);border:1px solid var(--line);border-radius:16p
       <div class="block">
         <div class="bh"><h3>Master prompt</h3><p>Paste it into Claude with the two logo files to rebuild or extend these guidelines.</p><div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:16px"><button class="btn btn-ink btn-sm" type="button" id="copyPrompt">Copy prompt</button><button class="btn btn-ghost btn-sm" type="button" id="dlPrompt">Download .md</button></div></div>
         <div class="bc"><pre class="prompt" id="promptText"><!--__PROMPT__--></pre></div>
+      </div>
+      <div class="block">
+        <div class="bh"><h3>Post design rules</h3><p>A variable template for static posts and carousels: brand variables, per-post variables, a locked 1080 × 1350 layout and a copy-paste prompt.</p><div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:16px"><button class="btn btn-ink btn-sm" type="button" id="copyRules">Copy template</button><button class="btn btn-ghost btn-sm" type="button" id="dlRules">Download .md</button></div></div>
+        <div class="bc"><pre class="prompt" id="rulesText"><!--__RULES__--></pre></div>
       </div>
     </div>
   </div>
@@ -1284,6 +1288,7 @@ const TOKENS_CSS=`/* Fastex Media brand tokens v1.0 */
 `;
 const TOKENS_JSON=JSON.stringify({name:'Fastex Media',version:'1.0',color:{orange:'#FF6600',ember:'#C94A00',ink:'#0D0D0D',paper:'#FBFAF8',slate:'#63636B',white:'#FFFFFF'},font:{display:'Outfit',body:'Inter'},radius:{pill:100,card:16,image:12},spaceUnit:8,diagonalDeg:33.69},null,2);
 const PROMPT=$('#promptText').textContent;
+const RULES=$('#rulesText').textContent;
 
 async function dlLogo(id, fmt){
   const l=byId[id]; if(!l) return;
@@ -1309,6 +1314,7 @@ async function zipAll(btn){
     for(const k of Object.keys(BRAND_ASSETS.originals)) z.file('original/'+k, BRAND_ASSETS.originals[k], {base64:true});
     z.file('tokens/fastex-tokens.css', TOKENS_CSS); z.file('tokens/fastex-tokens.json', TOKENS_JSON);
     z.file('BRANDKIT_PROMPT.md', PROMPT);
+    z.file('Brand-Design-Rules-Variable-Template.md', RULES);
     z.file('README.txt', 'Fastex Media brand kit v1.0\n\nsvg/  vector logos (use these whenever possible)\npng/  raster logos at '+size+' px\noriginal/  artwork as supplied\ntokens/  colours and fonts for developers\n\nFonts: Outfit and Inter, free at fonts.google.com\nQuestions: hello@fastexmedia.com\n');
     const blob=await z.generateAsync({type:'blob'});
     await saveFile('fastex-media-brand-kit.zip', blob, 'application/zip');
@@ -1318,6 +1324,8 @@ async function zipAll(btn){
 $$('[data-zip]').forEach(b=>b.addEventListener('click',()=>zipAll(b)));
 $('#copyPrompt').addEventListener('click',()=>copy(PROMPT));
 $('#dlPrompt').addEventListener('click',()=>saveFile('BRANDKIT_PROMPT.md',PROMPT,'text/markdown'));
+$('#copyRules').addEventListener('click',()=>copy(RULES));
+$('#dlRules').addEventListener('click',()=>saveFile('Brand-Design-Rules-Variable-Template.md',RULES,'text/markdown'));
 
 /* ---------- checklist ---------- */
 const cks=$$('#checklist input');
