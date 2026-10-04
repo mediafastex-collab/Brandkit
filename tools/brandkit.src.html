@@ -1,0 +1,1128 @@
+<title>Fastex Media Brand Kit</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=Inter:wght@400;500;600&family=DM+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: a brand book. Sticky chapter rail on the left, one reading column on the right;
+   every chapter opens on the 56° diagonal taken from the FX chevron. */
+:root{
+  --paper:#FBFAF8; --raised:#FFFFFF; --sunk:#F2F0EC;
+  --ink:#0D0D0D; --slate:#63636B; --line:rgba(13,13,13,.12); --line-strong:rgba(13,13,13,.28);
+  --ember:#C94A00; --wash:#FFF1E7;
+  --good:#1D7A4C; --good-wash:#E6F4EC; --bad:#B4232C; --bad-wash:#FBE9EA;
+  /* fixed brand constants: never themed */
+  --fx-orange:#FF6600; --fx-ink:#0D0D0D; --fx-white:#FFFFFF; --fx-paper:#FBFAF8;
+  --f-display:"Outfit","Outfit Fallback",ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
+  --f-body:"Inter","Inter Fallback",ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
+  --f-mono:"DM Mono",ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+  --diag:33.69deg; /* atan(2/3): the chevron's lean from vertical */
+  --ease:cubic-bezier(.16,1,.3,1);
+  --rail:236px;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --paper:#0E0E10; --raised:#17171A; --sunk:#111113;
+  --ink:#F3F1EC; --slate:#A2A2AA; --line:rgba(255,255,255,.12); --line-strong:rgba(255,255,255,.3);
+  --ember:#FF7A26; --wash:#2A1A10;
+  --good:#4CC38A; --good-wash:#12291D; --bad:#FF6B72; --bad-wash:#33161A;
+  color-scheme:dark }}
+:root[data-theme="dark"]{
+  --paper:#0E0E10; --raised:#17171A; --sunk:#111113;
+  --ink:#F3F1EC; --slate:#A2A2AA; --line:rgba(255,255,255,.12); --line-strong:rgba(255,255,255,.3);
+  --ember:#FF7A26; --wash:#2A1A10;
+  --good:#4CC38A; --good-wash:#12291D; --bad:#FF6B72; --bad-wash:#33161A;
+  color-scheme:dark }
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:24px}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto} *{transition:none!important;animation:none!important}}
+body{margin:0;background:var(--paper);color:var(--ink);font:400 16px/1.6 var(--f-body);-webkit-font-smoothing:antialiased}
+h1,h2,h3,h4{font-family:var(--f-display);font-weight:600;line-height:1.1;margin:0;text-wrap:balance;letter-spacing:-.015em}
+p{margin:0}
+a{color:var(--ember);text-underline-offset:3px}
+:focus-visible{outline:2px solid var(--ember);outline-offset:2px;border-radius:4px}
+.mono{font-family:var(--f-mono);font-size:.82rem;letter-spacing:0}
+.eyebrow{font:500 .72rem/1.2 var(--f-body);letter-spacing:.12em;text-transform:uppercase;color:var(--slate)}
+.muted{color:var(--slate)}
+.num{font-variant-numeric:tabular-nums}
+
+/* ---------- shell ---------- */
+.shell{display:grid;grid-template-columns:var(--rail) minmax(0,1fr);min-height:100vh}
+.rail{position:sticky;top:env(safe-area-inset-top,0px);height:100vh;overflow-y:auto;border-right:1px solid var(--line);padding:28px 20px;display:flex;flex-direction:column;gap:28px;background:var(--paper)}
+.rail-brand{display:flex;align-items:center;gap:10px;color:var(--ink);text-decoration:none}
+.rail-brand svg{width:34px;height:auto}
+.rail-brand b{font:600 1rem/1.1 var(--f-display);display:block;white-space:nowrap}
+.rail-brand span{font-size:.72rem;color:var(--slate)}
+.toc{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:2px}
+.toc a{display:grid;grid-template-columns:28px 1fr;align-items:baseline;padding:7px 10px;border-radius:8px;text-decoration:none;color:var(--slate);font-size:.9rem}
+.toc a span{font:500 .72rem var(--f-mono);color:var(--slate)}
+.toc a:hover{background:var(--sunk);color:var(--ink)}
+.toc a.on{background:var(--wash);color:var(--ink)}
+.toc a.on span{color:var(--ember)}
+.rail-foot{margin-top:auto;display:flex;flex-direction:column;gap:10px;font-size:.78rem;color:var(--slate)}
+.theme-btn{appearance:none;border:1px solid var(--line-strong);background:transparent;color:var(--ink);font:500 .78rem var(--f-body);padding:7px 12px;border-radius:100px;cursor:pointer;align-self:flex-start}
+.theme-btn:hover{background:var(--sunk)}
+main{min-width:0;padding-inline:clamp(16px,5vw,72px);padding-block:0 96px}
+.col{max-width:960px;margin-inline:auto}
+
+@media (max-width: 900px){
+  .shell{grid-template-columns:minmax(0,1fr)}
+  .rail{position:sticky;top:env(safe-area-inset-top,0px);height:auto;z-index:20;flex-direction:row;align-items:center;padding:10px 16px;gap:12px;border-right:0;border-bottom:1px solid var(--line);overflow:hidden}
+  .rail-brand span,.rail-foot{display:none}
+  .toc{flex-direction:row;overflow-x:auto;scrollbar-width:none;gap:4px;min-width:0}
+  .toc::-webkit-scrollbar{display:none}
+  .toc a{display:block;white-space:nowrap;padding:6px 10px}
+  .toc a span{display:none}
+  html{scroll-padding-top:64px}
+}
+
+/* ---------- hero ---------- */
+.hero{position:relative;overflow:hidden;background:var(--fx-ink);color:var(--fx-white);border-radius:0 0 28px 28px;margin-inline:calc(-1 * clamp(16px,5vw,72px));padding:clamp(40px,7vw,88px) clamp(16px,5vw,72px) clamp(36px,5vw,56px)}
+.hero-in{max-width:960px;margin-inline:auto;position:relative;z-index:1;display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,.75fr);gap:40px;align-items:end}
+.hero h1{font-size:clamp(2.6rem,7vw,5.4rem);font-weight:600;letter-spacing:-.035em;line-height:.98}
+.hero h1 em{font-style:normal;color:var(--fx-orange)}
+.hero .lede{margin-top:20px;max-width:46ch;font-size:1.08rem;color:#C9C7C2}
+.hero-meta{margin-top:32px;display:flex;flex-wrap:wrap;gap:10px 28px;font-size:.8rem;color:#9C9A95}
+.hero-meta b{display:block;color:var(--fx-white);font:500 .92rem var(--f-body)}
+.hero-mark{justify-self:end;width:min(100%,300px)}
+.hero-mark svg{width:100%;height:auto;display:block}
+.hero-stripe{position:absolute;top:-10%;right:18%;width:clamp(48px,7vw,92px);height:130%;background:var(--fx-orange);transform:skewX(var(--diag));opacity:.08;pointer-events:none}
+.hero-stripe.b{right:calc(18% + clamp(80px,11vw,150px));opacity:.05}
+.hero-cta{margin-top:28px;display:flex;flex-wrap:wrap;gap:10px}
+@media (max-width:720px){.hero-in{grid-template-columns:1fr}.hero-mark{justify-self:start;width:150px;order:-1}}
+
+/* ---------- buttons ---------- */
+.btn{appearance:none;display:inline-flex;align-items:center;gap:8px;border:1px solid transparent;border-radius:100px;padding:10px 18px;font:600 .9rem/1 var(--f-body);cursor:pointer;text-decoration:none;transition:transform .2s var(--ease),background .2s}
+.btn:active{transform:translateY(1px)}
+.btn-orange{background:var(--fx-orange);color:var(--fx-ink)}
+.btn-orange:hover{background:#FF7A1F}
+.btn-ink{background:var(--ink);color:var(--paper)}
+.btn-ghost{background:transparent;color:inherit;border-color:currentColor}
+.btn-sm{padding:7px 12px;font-size:.78rem}
+.hero .btn-ghost{color:var(--fx-white);border-color:rgba(255,255,255,.4)}
+.chip{appearance:none;border:1px solid var(--line-strong);background:var(--raised);color:var(--ink);border-radius:100px;padding:6px 11px;font:500 .76rem/1 var(--f-body);cursor:pointer;display:inline-flex;align-items:center;gap:6px}
+.chip:hover{border-color:var(--ink)}
+.chip svg{width:13px;height:13px}
+
+/* ---------- chapters ---------- */
+section.ch{padding-top:clamp(64px,9vw,112px)}
+.ch-head{display:grid;grid-template-columns:auto minmax(0,1fr);gap:4px 20px;align-items:end;padding-bottom:22px;margin-bottom:36px;border-bottom:1px solid var(--line);position:relative}
+.ch-no{font:600 clamp(3rem,7vw,5rem)/.8 var(--f-display);color:transparent;-webkit-text-stroke:1.5px var(--line-strong);letter-spacing:-.04em;grid-row:span 2}
+.ch-head h2{font-size:clamp(1.9rem,4vw,2.8rem)}
+.ch-head p{color:var(--slate);max-width:62ch}
+.ch-head::after{content:"";position:absolute;left:0;bottom:-1px;width:64px;height:3px;background:var(--fx-orange)}
+h3.sub{font-size:1.3rem;margin:48px 0 16px;display:flex;align-items:center;gap:10px}
+h3.sub::before{content:"";width:10px;height:14px;background:var(--fx-orange);clip-path:polygon(0 0,40% 0,100% 50%,40% 100%,0 100%,60% 50%)}
+.prose{max-width:66ch;display:flex;flex-direction:column;gap:14px;color:var(--ink)}
+.prose p{color:var(--ink)}
+.grid{display:grid;gap:16px}
+.g2{grid-template-columns:repeat(2,minmax(0,1fr))}
+.g3{grid-template-columns:repeat(3,minmax(0,1fr))}
+.g4{grid-template-columns:repeat(4,minmax(0,1fr))}
+@media (max-width:900px){.g4{grid-template-columns:repeat(2,minmax(0,1fr))}.g3{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:600px){.g2,.g3,.g4{grid-template-columns:minmax(0,1fr)}}
+.card{background:var(--raised);border:1px solid var(--line);border-radius:16px;padding:20px;min-width:0}
+.card h4{font-size:1.06rem;margin-bottom:6px}
+.card p{font-size:.92rem;color:var(--slate)}
+.plain{min-width:0;display:flex;flex-direction:column;gap:6px}
+.plain h4{font-size:1.05rem}
+.plain p{font-size:.92rem;color:var(--slate)}
+
+/* statement block */
+.statement{font:500 clamp(1.4rem,3vw,2rem)/1.25 var(--f-display);letter-spacing:-.015em;max-width:30ch;text-wrap:balance}
+.statement em{font-style:normal;color:var(--ember)}
+.pos{background:var(--sunk);border-radius:16px;padding:clamp(20px,3vw,32px);font-size:1.05rem;line-height:1.65;max-width:none}
+.pos b{font-weight:600}
+.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.stat{padding:22px 18px;border-right:1px solid var(--line);min-width:0}
+.stat:last-child{border-right:0}
+.stat b{display:block;font:600 clamp(2rem,4vw,2.8rem)/1 var(--f-display);letter-spacing:-.03em;font-variant-numeric:tabular-nums}
+.stat span{font-size:.84rem;color:var(--slate)}
+@media (max-width:700px){.stats{grid-template-columns:repeat(2,minmax(0,1fr))}.stat:nth-child(2){border-right:0}.stat:nth-child(-n+2){border-bottom:1px solid var(--line)}}
+.steps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0;counter-reset:s}
+.step{padding:22px 22px 22px 0;border-top:3px solid var(--ink);min-width:0;margin-right:16px}
+.step:nth-child(3){margin-right:0}
+.step i{font:500 .74rem var(--f-mono);color:var(--ember);font-style:normal}
+.step h4{font-size:1.15rem;margin:8px 0 6px}
+.step p{font-size:.92rem;color:var(--slate)}
+@media (max-width:700px){.steps{grid-template-columns:1fr}.step{margin-right:0}}
+
+/* tables */
+.tbl-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:14px;background:var(--raised)}
+table{border-collapse:collapse;width:100%;font-size:.88rem;min-width:620px}
+th,td{text-align:left;padding:12px 14px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font:500 .7rem var(--f-body);letter-spacing:.1em;text-transform:uppercase;color:var(--slate);background:var(--sunk)}
+tr:last-child td{border-bottom:0}
+td b{font-weight:600}
+
+/* do / don't */
+.dd{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+@media (max-width:600px){.dd{grid-template-columns:1fr}}
+.dd > div{border-radius:14px;padding:18px 20px;min-width:0}
+.dd .do{background:var(--good-wash)}
+.dd .dont{background:var(--bad-wash)}
+.dd h4{font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;font-family:var(--f-body);font-weight:600;margin-bottom:10px}
+.dd .do h4{color:var(--good)}
+.dd .dont h4{color:var(--bad)}
+.dd ul{margin:0;padding-left:18px;display:flex;flex-direction:column;gap:6px;font-size:.92rem}
+.tag{display:inline-block;font:600 .66rem/1 var(--f-body);letter-spacing:.08em;text-transform:uppercase;padding:5px 8px;border-radius:100px}
+.tag.ok{background:var(--good-wash);color:var(--good)}
+.tag.no{background:var(--bad-wash);color:var(--bad)}
+.tag.acc{background:var(--wash);color:var(--ember)}
+
+/* voice */
+.trait{display:grid;grid-template-columns:150px minmax(0,1fr) minmax(0,1fr);gap:20px;padding:20px 0;border-bottom:1px solid var(--line);align-items:start}
+.trait:first-child{border-top:1px solid var(--line)}
+.trait h4{font-size:1.3rem}
+.trait .say{font-size:.92rem}
+.trait .say q{display:block;font-family:var(--f-display);font-size:1.02rem;quotes:none;margin-top:4px}
+@media (max-width:700px){.trait{grid-template-columns:1fr;gap:8px}}
+.rewrite{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0;border:1px solid var(--line);border-radius:14px;overflow:hidden;background:var(--raised)}
+.rewrite + .rewrite{margin-top:12px}
+.rewrite > div{padding:16px 18px;min-width:0}
+.rewrite .before{border-right:1px solid var(--line);color:var(--slate);text-decoration:line-through;text-decoration-color:var(--bad);text-decoration-thickness:1px}
+.rewrite .after{font-weight:500}
+.rewrite .lbl{display:block;text-decoration:none;margin-bottom:6px}
+@media (max-width:600px){.rewrite{grid-template-columns:1fr}.rewrite .before{border-right:0;border-bottom:1px solid var(--line)}}
+.words{display:flex;flex-wrap:wrap;gap:6px}
+.words span{font-size:.84rem;padding:5px 10px;border-radius:100px;background:var(--sunk)}
+.dont .words span{background:transparent;border:1px solid var(--line-strong)}
+
+/* tone */
+.tone-tabs{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:18px}
+.tone-tabs button{appearance:none;border:1px solid var(--line-strong);background:transparent;color:var(--ink);border-radius:100px;padding:8px 14px;font:500 .85rem var(--f-body);cursor:pointer}
+.tone-tabs button[aria-selected="true"]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.tone-panel{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:28px;background:var(--raised);border:1px solid var(--line);border-radius:18px;padding:clamp(18px,3vw,30px)}
+@media (max-width:760px){.tone-panel{grid-template-columns:1fr}}
+.dial{display:flex;flex-direction:column;gap:18px}
+.dial-row .ends{display:flex;justify-content:space-between;font-size:.78rem;color:var(--slate);margin-bottom:6px}
+.dial-row .track{position:relative;height:6px;border-radius:6px;background:var(--sunk);border:1px solid var(--line)}
+.dial-row .dot{position:absolute;top:50%;width:16px;height:16px;margin:-8px 0 0 -8px;border-radius:50%;background:var(--fx-orange);border:3px solid var(--raised);box-shadow:0 0 0 1px var(--line-strong);transition:left .5s var(--ease)}
+.tone-sample{font:500 1.18rem/1.4 var(--f-display);letter-spacing:-.01em;border-left:3px solid var(--fx-orange);padding-left:16px;margin:10px 0 16px}
+.tone-note{font-size:.92rem;color:var(--slate)}
+
+/* logo */
+.logo-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+@media (max-width:640px){.logo-grid{grid-template-columns:1fr}}
+.logo-card{border:1px solid var(--line);border-radius:18px;overflow:hidden;background:var(--raised);display:flex;flex-direction:column;min-width:0}
+.logo-stage{aspect-ratio:16/10;display:flex;align-items:center;justify-content:center;padding:6% 10%}
+.logo-stage svg{max-width:100%;max-height:100%;width:auto;height:auto}
+.logo-stage.light{background:var(--fx-paper)}
+.logo-stage.dark{background:var(--fx-ink)}
+.logo-stage.orange{background:var(--fx-orange)}
+.logo-stage.wide{padding:12% 9%}
+.logo-stage.wide svg{width:100%}
+.logo-stage.tile svg{height:100%;width:auto}
+.logo-stage.mark svg{height:76%;width:auto}
+.logo-info{padding:14px 16px 16px;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px;border-top:1px solid var(--line)}
+.logo-info h4{font-size:.98rem}
+.logo-info p{font-size:.8rem;color:var(--slate)}
+.logo-info .acts{display:flex;gap:6px}
+.dl-size{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin-bottom:16px;font-size:.86rem}
+.dl-size select{font:500 .86rem var(--f-body);padding:7px 10px;border-radius:10px;border:1px solid var(--line-strong);background:var(--raised);color:var(--ink)}
+.diagram{background:var(--raised);border:1px solid var(--line);border-radius:18px;padding:clamp(14px,3vw,28px);min-width:0}
+.diagram svg{width:100%;height:auto;display:block}
+.diagram .cap{margin-top:12px;font-size:.88rem;color:var(--slate)}
+.dg-line{stroke:var(--slate);stroke-width:2;fill:none}
+.dg-dash{stroke:var(--ember);stroke-width:2.5;stroke-dasharray:10 8;fill:none}
+.dg-text{fill:var(--ink);font:500 22px var(--f-body)}
+.dg-small{fill:var(--slate);font:400 18px var(--f-body)}
+.dg-acc{fill:var(--ember);font:500 24px var(--f-mono)}
+.dg-ink{fill:var(--ink)}
+.misuse{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+@media (max-width:700px){.misuse{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.misuse figure{margin:0;border:1px solid var(--line);border-radius:14px;overflow:hidden;background:var(--raised);min-width:0}
+.misuse .ms{aspect-ratio:4/3;display:grid;place-items:center;background:var(--fx-paper);position:relative;overflow:hidden}
+.misuse .ms svg{height:52%;width:auto;overflow:visible}
+.misuse figcaption{padding:10px 12px;font-size:.82rem;display:flex;gap:8px;align-items:flex-start}
+.misuse figcaption::before{content:"✕";color:var(--bad);font-weight:700}
+.minsize{display:flex;flex-wrap:wrap;align-items:flex-end;gap:28px}
+.minsize figure{margin:0;display:flex;flex-direction:column;gap:8px;align-items:flex-start;font-size:.82rem;color:var(--slate)}
+
+/* colour */
+.swatches{display:grid;grid-template-columns:2fr 1.4fr 1.4fr 1fr 1fr;gap:12px}
+@media (max-width:900px){.swatches{grid-template-columns:repeat(2,minmax(0,1fr))}.swatches .sw:first-child{grid-column:1/-1}}
+@media (max-width:480px){.swatches{grid-template-columns:1fr}}
+.sw{border-radius:16px;overflow:hidden;border:1px solid var(--line);background:var(--raised);display:flex;flex-direction:column;min-width:0}
+.sw-chip{height:150px;padding:14px;display:flex;align-items:flex-end;font:600 1.1rem var(--f-display)}
+.sw:first-child .sw-chip{height:190px}
+.sw-body{padding:14px;display:flex;flex-direction:column;gap:4px;font-size:.82rem}
+.sw-body .role{color:var(--slate);margin-bottom:6px;font-size:.8rem}
+.code-row{display:flex;justify-content:space-between;align-items:center;gap:6px;padding:4px 0;border-top:1px dashed var(--line)}
+.code-row span:first-child{color:var(--slate);font-size:.72rem;letter-spacing:.06em;text-transform:uppercase}
+.copy{appearance:none;border:0;background:transparent;color:var(--ink);font:500 .8rem var(--f-mono);cursor:pointer;padding:2px 4px;border-radius:4px}
+.copy:hover{background:var(--sunk)}
+.ratio{display:flex;height:56px;border-radius:12px;overflow:hidden;border:1px solid var(--line)}
+.ratio div{display:flex;align-items:flex-end;padding:8px 10px;font:500 .74rem var(--f-body);min-width:0;white-space:nowrap;overflow:hidden}
+.pair{display:grid;grid-template-columns:96px minmax(0,1fr) auto;gap:14px;align-items:center;padding:12px 0;border-bottom:1px solid var(--line)}
+.pair .aa{height:52px;border-radius:10px;display:grid;place-items:center;font:600 1.3rem var(--f-display);border:1px solid var(--line)}
+.pair p{font-size:.9rem}
+.pair small{display:block;color:var(--slate);font-size:.8rem}
+.pair .r{text-align:right;font:500 .9rem var(--f-mono)}
+
+/* type */
+.specimen{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:16px}
+@media (max-width:760px){.specimen{grid-template-columns:1fr}}
+.spec{border:1px solid var(--line);border-radius:18px;padding:24px;background:var(--raised);min-width:0;display:flex;flex-direction:column;gap:14px}
+.spec .big{font-size:clamp(4rem,9vw,6.5rem);line-height:.9;letter-spacing:-.04em}
+.spec .alpha{font-size:1.05rem;color:var(--slate);word-break:break-all;line-height:1.5}
+.scale-row{display:grid;grid-template-columns:120px minmax(0,1fr);gap:16px;align-items:baseline;padding:14px 0;border-bottom:1px solid var(--line)}
+.scale-row .meta{font:400 .74rem/1.4 var(--f-mono);color:var(--slate)}
+.scale-row .s{min-width:0;overflow-wrap:anywhere}
+@media (max-width:560px){.scale-row{grid-template-columns:1fr;gap:4px}}
+
+/* graphics */
+.cut-demo{position:relative;height:200px;border-radius:18px;overflow:hidden;background:var(--fx-ink)}
+.cut-demo .band{position:absolute;top:-20px;bottom:-20px;width:62px;background:var(--fx-orange);transform:skewX(var(--diag))}
+.cut-demo .lbl{position:absolute;left:20px;bottom:16px;color:var(--fx-white);font:500 .84rem var(--f-body)}
+.cut-demo .angle{position:absolute;right:20px;top:16px;color:var(--fx-orange);font:500 1.6rem var(--f-mono)}
+.chev-list{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:8px}
+.chev-list li{display:flex;gap:10px;align-items:baseline}
+.chev-list li::before{content:"";flex:none;width:9px;height:12px;background:var(--fx-orange);clip-path:polygon(0 0,40% 0,100% 50%,40% 100%,0 100%,60% 50%);transform:translateY(1px)}
+.icons{display:flex;flex-wrap:wrap;gap:10px}
+.icons span{width:56px;height:56px;border-radius:14px;border:1px solid var(--line);display:grid;place-items:center;background:var(--raised)}
+.icons svg{width:24px;height:24px;stroke:var(--ink);stroke-width:2;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.icons span.acc svg{stroke:var(--ember)}
+
+/* social + ad mockups: always brand colours, independent of theme */
+.mocks{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;align-items:start}
+@media (max-width:900px){.mocks{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:440px){.mocks{grid-template-columns:1fr}}
+.mock{margin:0;display:flex;flex-direction:column;gap:8px;min-width:0}
+.mock figcaption{font-size:.8rem;color:var(--slate)}
+.mock figcaption b{color:var(--ink);font-weight:600;display:block;font-size:.86rem}
+.art{position:relative;overflow:hidden;border-radius:12px;container-type:inline-size;font-family:var(--f-display);box-shadow:0 1px 0 var(--line),0 12px 30px -18px rgba(0,0,0,.5);max-width:100%}
+.art .fxm{position:absolute;width:13cqw;height:auto}
+.r11{aspect-ratio:1/1}.r45{aspect-ratio:4/5}.r916{aspect-ratio:9/16}.r191{aspect-ratio:1.91/1}
+.a-stat{background:var(--fx-ink);color:var(--fx-white);padding:9cqw}
+.a-stat .ey{font:500 3.6cqw var(--f-body);letter-spacing:.12em;text-transform:uppercase;color:#A9A7A2}
+.a-stat .n{font-weight:600;font-size:38cqw;line-height:.85;letter-spacing:-.05em;color:var(--fx-orange);margin-top:10cqw}
+.a-stat .t{font-weight:500;font-size:7cqw;line-height:1.15;margin-top:4cqw;max-width:14ch}
+.a-stat .fxm{left:9cqw;bottom:8cqw}
+.a-stat .h{position:absolute;right:9cqw;bottom:9.5cqw;font:500 3.4cqw var(--f-body);color:#A9A7A2}
+.a-quote{background:var(--fx-paper);color:var(--fx-ink);padding:10cqw 9cqw}
+.a-quote .qm{width:9cqw;height:13cqw;background:var(--fx-orange);clip-path:polygon(0 0,40% 0,100% 50%,40% 100%,0 100%,60% 50%)}
+.a-quote .q{font-weight:500;font-size:8.6cqw;line-height:1.14;letter-spacing:-.02em;margin-top:8cqw}
+.a-quote .by{font:500 3.6cqw var(--f-body);color:var(--fx-ink);opacity:.62;margin-top:7cqw}
+.a-quote .fxm{right:9cqw;bottom:9cqw;width:11cqw}
+.a-quote .rule{position:absolute;left:9cqw;bottom:10.5cqw;width:30cqw;height:.8cqw;background:var(--fx-ink)}
+.a-car{background:var(--fx-orange);color:var(--fx-ink);padding:10cqw 9cqw}
+.a-car .ix{font:500 3.6cqw var(--f-mono)}
+.a-car .t{font-weight:600;font-size:13.5cqw;line-height:.95;letter-spacing:-.04em;margin-top:22cqw}
+.a-car .s{font:500 4.4cqw/1.35 var(--f-body);margin-top:6cqw;max-width:24ch}
+.a-car .sw{position:absolute;right:9cqw;bottom:9cqw;font:600 4cqw var(--f-body);display:flex;align-items:center;gap:2cqw}
+.a-car .fxm{left:9cqw;bottom:8cqw;width:11cqw}
+.a-story{background:var(--fx-ink);color:var(--fx-white);padding:12cqw 9cqw}
+.a-story .band{position:absolute;top:-5%;bottom:-5%;right:-6cqw;width:30cqw;background:var(--fx-orange);transform:skewX(var(--diag))}
+.a-story .fxm{left:9cqw;top:12cqw;width:15cqw}
+.a-story .t{position:absolute;left:9cqw;right:30cqw;top:44%;font-weight:600;font-size:12cqw;line-height:1;letter-spacing:-.035em}
+.a-story .cta{position:absolute;left:9cqw;right:9cqw;bottom:14cqw;background:var(--fx-white);color:var(--fx-ink);border-radius:100px;padding:5cqw;text-align:center;font:600 5cqw var(--f-body)}
+.post{background:var(--raised);border:1px solid var(--line);border-radius:16px;padding:20px;max-width:560px;min-width:0}
+.post-head{display:flex;gap:10px;align-items:center;margin-bottom:12px}
+.post-head svg{width:44px;height:44px;flex:none}
+.post-head b{display:block;font-size:.92rem}
+.post-head span{font-size:.76rem;color:var(--slate)}
+.post-body{font-size:.92rem;display:flex;flex-direction:column;gap:10px}
+.post-body .lab{font:500 .64rem var(--f-mono);color:var(--ember);letter-spacing:.06em;text-transform:uppercase;display:block}
+.ad-li{background:var(--raised);border:1px solid var(--line);border-radius:14px;overflow:hidden;max-width:560px;min-width:0}
+.ad-li .hd{display:flex;gap:10px;align-items:center;padding:14px 16px 8px}
+.ad-li .hd svg{width:40px;height:40px;flex:none}
+.ad-li .hd b{font-size:.88rem;display:block}
+.ad-li .hd span{font-size:.72rem;color:var(--slate)}
+.ad-li .intro{padding:0 16px 12px;font-size:.88rem}
+.ad-li .img{background:var(--fx-ink);color:var(--fx-white);padding:7cqw 6cqw;position:relative;border-radius:0;box-shadow:none}
+.ad-li .img .t{font-weight:600;font-size:7.4cqw;line-height:1;letter-spacing:-.03em;max-width:12ch}
+.ad-li .img .t em{font-style:normal;color:var(--fx-orange)}
+.ad-li .img .s{font:500 2.6cqw var(--f-body);color:#B5B3AE;margin-top:3cqw}
+.ad-li .img .band{position:absolute;top:-10%;bottom:-10%;right:14cqw;width:9cqw;background:var(--fx-orange);transform:skewX(var(--diag))}
+.ad-li .img .fxm{right:4.5cqw;bottom:5cqw;width:7cqw}
+.ad-li .ft{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:12px 16px;background:var(--sunk)}
+.ad-li .ft b{font-size:.88rem;display:block}
+.ad-li .ft span{font-size:.74rem;color:var(--slate)}
+.ad-li .ft .btn{border:1px solid var(--ember);color:var(--ember);background:transparent;padding:7px 14px;font-size:.8rem;white-space:nowrap}
+.ad-g{background:var(--raised);border:1px solid var(--line);border-radius:14px;padding:18px;max-width:620px;font-family:Arial,Helvetica,sans-serif;min-width:0}
+.ad-g .sp{font-size:.78rem;font-weight:700;color:var(--ink)}
+.ad-g .url{font-size:.8rem;color:var(--slate);display:flex;align-items:center;gap:8px;margin:4px 0 6px}
+.ad-g .url svg{width:22px;height:22px}
+.ad-g .h{font-size:1.18rem;color:#1A0DAB;line-height:1.3}
+:root[data-theme="dark"] .ad-g .h{color:#99C3FF}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .ad-g .h{color:#99C3FF}}
+.ad-g .d{font-size:.88rem;color:var(--slate);margin-top:4px}
+.ad-wrap{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:18px;align-items:start}
+@media (max-width:860px){.ad-wrap{grid-template-columns:1fr}}
+
+/* marketing */
+.house{display:flex;flex-direction:column;gap:8px}
+.house .roof{background:var(--fx-ink);color:var(--fx-white);border-radius:16px;padding:22px 24px}
+.house .roof .eyebrow{color:#A9A7A2}
+.house .roof p{font:600 clamp(1.3rem,3vw,1.8rem)/1.2 var(--f-display);margin-top:6px;letter-spacing:-.02em}
+.house .pillars{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
+@media (max-width:760px){.house .pillars{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.house .pillars div{background:var(--raised);border:1px solid var(--line);border-radius:14px;padding:16px;min-width:0}
+.house .pillars b{font:600 1rem var(--f-display);display:block;margin-bottom:4px}
+.house .pillars span{font-size:.84rem;color:var(--slate)}
+.house .base{background:var(--wash);border-radius:14px;padding:14px 18px;font-size:.88rem}
+.funnel{display:flex;flex-direction:column;gap:6px}
+.funnel div{display:grid;grid-template-columns:minmax(0,180px) minmax(0,1fr) minmax(0,160px);gap:14px;align-items:center;padding:12px 16px;border-radius:12px;background:var(--raised);border:1px solid var(--line);font-size:.88rem}
+.funnel div b{font-family:var(--f-display);font-size:1rem}
+.funnel div span:last-child{font:500 .76rem var(--f-mono);color:var(--ember)}
+@media (max-width:640px){.funnel div{grid-template-columns:1fr;gap:2px}}
+.email{background:var(--raised);border:1px solid var(--line);border-radius:14px;overflow:hidden;min-width:0}
+.email .meta{padding:12px 16px;border-bottom:1px solid var(--line);font-size:.82rem;display:flex;flex-direction:column;gap:2px}
+.email .meta span{color:var(--slate)}
+.email .bd{padding:16px;font-size:.92rem;display:flex;flex-direction:column;gap:10px}
+.wa{background:#E7DDD3;border-radius:14px;padding:16px;display:flex;flex-direction:column;gap:8px;min-width:0}
+:root[data-theme="dark"] .wa{background:#1B1714}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .wa{background:#1B1714}}
+.wa .msg{max-width:85%;padding:9px 12px;border-radius:10px;font-size:.88rem;line-height:1.45;background:var(--raised);color:var(--ink);align-self:flex-start;box-shadow:0 1px 0 rgba(0,0,0,.08)}
+.wa .msg.me{align-self:flex-end;background:#D9FDD3;color:#111}
+:root[data-theme="dark"] .wa .msg.me{background:#144D37;color:#EDEDED}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .wa .msg.me{background:#144D37;color:#EDEDED}}
+.wa .qr{align-self:flex-end;display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end}
+.wa .qr span{background:var(--raised);color:#0A7CFF;font-size:.8rem;padding:6px 12px;border-radius:100px}
+.check{list-style:none;padding:0;margin:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px 24px}
+@media (max-width:640px){.check{grid-template-columns:1fr}}
+.check label{display:flex;gap:10px;align-items:flex-start;font-size:.92rem;cursor:pointer;padding:6px 0}
+.check input{accent-color:var(--fx-orange);width:18px;height:18px;margin-top:2px;flex:none}
+
+/* downloads */
+.dl-hero{background:var(--fx-ink);color:var(--fx-white);border-radius:20px;padding:clamp(22px,4vw,36px);display:grid;grid-template-columns:minmax(0,1fr) auto;gap:20px;align-items:center;position:relative;overflow:hidden}
+.dl-hero .band{position:absolute;top:-20%;bottom:-20%;right:24%;width:60px;background:var(--fx-orange);opacity:.12;transform:skewX(var(--diag))}
+.dl-hero h3{font-size:1.6rem;position:relative}
+.dl-hero p{color:#B5B3AE;margin-top:6px;font-size:.92rem;position:relative}
+.dl-hero .btn{position:relative}
+@media (max-width:640px){.dl-hero{grid-template-columns:1fr}}
+.files{display:flex;flex-direction:column}
+.file{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:12px;align-items:center;padding:12px 0;border-bottom:1px solid var(--line)}
+.file b{font-weight:500;font-size:.92rem}
+.file small{display:block;color:var(--slate);font-size:.78rem}
+.file .acts{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end}
+pre.prompt{background:var(--sunk);border:1px solid var(--line);border-radius:16px;padding:20px;font:400 .8rem/1.6 var(--f-mono);white-space:pre-wrap;overflow-wrap:anywhere;max-height:520px;overflow:auto;margin:0}
+.toast{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom,0px));transform:translate(-50%,20px);background:var(--ink);color:var(--paper);padding:10px 16px;border-radius:100px;font-size:.86rem;opacity:0;pointer-events:none;transition:opacity .25s,transform .35s var(--ease);z-index:50;max-width:calc(100% - 32px);text-align:center}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+footer{margin-top:96px;padding-top:28px;border-top:1px solid var(--line);display:flex;flex-wrap:wrap;justify-content:space-between;gap:16px;font-size:.82rem;color:var(--slate)}
+footer .ct{display:flex;flex-wrap:wrap;gap:6px 20px}
+</style>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="fx" viewBox="138 155 338 306">
+      <path fill="currentColor" d="M138 241H261.33L290.67 285H138ZM138 330H291.33L262 374H181V461H138Z"/>
+      <path fill="currentColor" d="M416 155H476L380.5 298.25L350.5 253.25ZM416 461H476L380.5 317.75L350.5 362.75Z"/>
+      <path fill="#FF6600" d="M204 155H264L366 308L264 461H204L306 308Z"/>
+    </symbol>
+    <symbol id="fx-mono" viewBox="138 155 338 306">
+      <path fill="currentColor" d="M138 241H240.33L269.67 285H138ZM138 330H270.33L241 374H181V461H138Z"/>
+      <path fill="currentColor" d="M416 155H476L380.5 298.25L350.5 253.25ZM416 461H476L380.5 317.75L350.5 362.75Z"/>
+      <path fill="currentColor" d="M204 155H264L366 308L264 461H204L306 308Z"/>
+    </symbol>
+    <symbol id="fx-badge" viewBox="0 0 616 616">
+      <circle cx="308" cy="308" r="308" fill="#0D0D0D"/>
+      <path fill="#FFFFFF" d="M138 241H261.33L290.67 285H138ZM138 330H291.33L262 374H181V461H138Z"/>
+      <path fill="#FFFFFF" d="M416 155H476L380.5 298.25L350.5 253.25ZM416 461H476L380.5 317.75L350.5 362.75Z"/>
+      <path fill="#FF6600" d="M204 155H264L366 308L264 461H204L306 308Z"/>
+    </symbol>
+  </defs>
+</svg>
+
+<div class="shell">
+<nav class="rail" aria-label="Brand kit chapters">
+  <a class="rail-brand" href="#top"><svg viewBox="0 0 616 616" aria-hidden="true"><use href="#fx-badge"/></svg><div><b>Fastex Media</b><span>Brand Kit · v1.0</span></div></a>
+  <ul class="toc" id="toc">
+    <li><a href="#foundation"><span>01</span>Foundation</a></li>
+    <li><a href="#voice"><span>02</span>Voice</a></li>
+    <li><a href="#tone"><span>03</span>Tone</a></li>
+    <li><a href="#logo"><span>04</span>Logo</a></li>
+    <li><a href="#colour"><span>05</span>Colour</a></li>
+    <li><a href="#type"><span>06</span>Typography</a></li>
+    <li><a href="#graphics"><span>07</span>Graphic language</a></li>
+    <li><a href="#social"><span>08</span>Social media</a></li>
+    <li><a href="#ads"><span>09</span>Advertising</a></li>
+    <li><a href="#marketing"><span>10</span>Marketing</a></li>
+    <li><a href="#downloads"><span>11</span>Downloads</a></li>
+    <li><a href="#prompt"><span>12</span>The prompt</a></li>
+  </ul>
+  <div class="rail-foot">
+    <button class="theme-btn" id="themeBtn" type="button">Switch to dark</button>
+    <span>Owned by Fastex Media marketing. Questions: hello@fastexmedia.com</span>
+  </div>
+</nav>
+
+<main id="top">
+  <header class="hero">
+    <div class="hero-stripe" aria-hidden="true"></div><div class="hero-stripe b" aria-hidden="true"></div>
+    <div class="hero-in">
+      <div>
+        <p class="eyebrow" style="color:#9C9A95">Fastex Media · Brand guidelines</p>
+        <h1 style="margin-top:14px">Brand Kit<em>.</em></h1>
+        <p class="lede">How Fastex Media looks, sounds and sells: voice, tone, logo, colour, type, social, ads and marketing, in one place. Download every logo file at the end.</p>
+        <div class="hero-cta">
+          <a class="btn btn-orange" href="#downloads">Download logos</a>
+          <a class="btn btn-ghost" href="#foundation">Read the guidelines</a>
+        </div>
+        <div class="hero-meta">
+          <div>Version<b>1.0</b></div>
+          <div>Updated<b>4 Oct 2026</b></div>
+          <div>Applies to<b>Web, social, ads, sales, print</b></div>
+        </div>
+      </div>
+      <div class="hero-mark"><svg viewBox="0 0 616 616" role="img" aria-label="Fastex Media badge"><use href="#fx-badge"/></svg></div>
+    </div>
+  </header>
+
+  <div class="col">
+
+  <!-- 01 FOUNDATION -->
+  <section class="ch" id="foundation">
+    <div class="ch-head"><span class="ch-no">01</span><h2>Brand foundation</h2><p>What we do, who it's for and why anyone should believe us. Everything else in this kit builds on this page.</p></div>
+
+    <p class="statement">We build outbound systems that put <em>qualified B2B meetings</em> on your sales calendar. Every week.</p>
+
+    <h3 class="sub">Positioning statement</h3>
+    <div class="pos">For <b>B2B companies in IT, solar, manufacturing, education and real estate</b> who need a predictable pipeline, <b>Fastex Media</b> is the lead generation partner that builds a multi-channel outbound system across LinkedIn, cold email, WhatsApp and paid media, and measures it on one number: <b>qualified meetings booked</b>. Unlike agencies that report impressions and clicks, we already know who signs in your industry.</div>
+
+    <h3 class="sub">Purpose, promise, personality</h3>
+    <div class="grid g3">
+      <div class="card"><p class="eyebrow">Purpose</p><h4 style="margin-top:8px">Help good businesses get discovered by the buyers who should know them.</h4><p>Owners have put years into their product. Our job is to put it in front of the right decision-makers.</p></div>
+      <div class="card"><p class="eyebrow">Promise</p><h4 style="margin-top:8px">Qualified meetings, not vanity metrics.</h4><p>We report on meetings booked and pipeline created. Likes and impressions are inputs, never the result.</p></div>
+      <div class="card"><p class="eyebrow">Personality</p><h4 style="margin-top:8px">The operator in the room.</h4><p>Calm, specific and sure of the system. The person who already has the numbers when everyone else has opinions.</p></div>
+    </div>
+
+    <h3 class="sub">Proof points</h3>
+    <div class="stats">
+      <div class="stat"><b>13+</b><span>Active client brands</span></div>
+      <div class="stat"><b>3X</b><span>Average lead growth</span></div>
+      <div class="stat"><b>60%</b><span>Average reduction in cost per lead</span></div>
+      <div class="stat"><b>4.9★</b><span>Client satisfaction, out of 5</span></div>
+    </div>
+    <p class="muted" style="font-size:.82rem;margin-top:10px">Figures as published on fastexmedia.com. Re-check them every quarter, and always describe them as averages across client accounts (see the claims rules in chapter 09).</p>
+
+    <h3 class="sub">Method: three moves, one machine</h3>
+    <div class="steps">
+      <div class="step"><i>Move 1</i><h4>Map the market</h4><p>Define the accounts worth winning and build a verified dataset of the decision-makers inside them.</p></div>
+      <div class="step"><i>Move 2</i><h4>Build the system</h4><p>Multi-channel sequences across LinkedIn, email, WhatsApp and paid, with personalisation built in.</p></div>
+      <div class="step"><i>Move 3</i><h4>Scale what converts</h4><p>Track replies and meetings by channel, then move budget and effort to what works.</p></div>
+    </div>
+
+    <h3 class="sub">Who we serve</h3>
+    <div class="grid g2">
+      <div class="plain"><h4>Primary buyer</h4><p>Founders, CEOs, sales heads and marketing heads at B2B companies with an average deal size that justifies outbound. They are busy and sceptical, and have been burned by agencies that reported clicks.</p></div>
+      <div class="plain"><h4>Core industries</h4><p>IT &amp; Software · Solar &amp; Renewable Energy · Manufacturing · Educational Institutes · Real Estate. Industry depth is a selling point: we already know who signs.</p></div>
+      <div class="plain"><h4>Services</h4><p>Performance Marketing · LinkedIn Lead Generation · Cold Email Marketing · WhatsApp Marketing · Social Media Marketing · Lead Research · Appointment Setting.</p></div>
+      <div class="plain"><h4>Lines in use</h4><p>Tagline: "Your brand. Your next chapter." Sign-off: "Engineered for B2B scale." Main CTA: "Book a Free Strategy Call".</p></div>
+    </div>
+  </section>
+
+  <!-- 02 VOICE -->
+  <section class="ch" id="voice">
+    <div class="ch-head"><span class="ch-no">02</span><h2>Brand voice</h2><p>Our voice is our personality in words. It stays the same everywhere. Chapter 03 covers how the tone shifts by context.</p></div>
+
+    <div>
+      <div class="trait"><h4>Direct</h4><p class="say">Lead with the outcome. Give the number, the timeline and the next step. Cut anything a busy founder would skip.</p><p class="say muted">Sounds like<q>"We book meetings with plant heads. Worth 15 minutes on Thursday?"</q></p></div>
+      <div class="trait"><h4>Proof-first</h4><p class="say">Every claim travels with a figure, a client type or a method. If we can't prove it, we don't say it.</p><p class="say muted">Sounds like<q>"60% lower cost per lead, averaged across client accounts."</q></p></div>
+      <div class="trait"><h4>Calm confidence</h4><p class="say">Certainty comes from the system, not from adjectives. No hype, no exclamation marks, no "revolutionary".</p><p class="say muted">Sounds like<q>"Three moves. One machine."</q></p></div>
+      <div class="trait"><h4>Industry-fluent</h4><p class="say">Use the buyer's own words: EPC, OEM, admissions cycle, channel partners. Show we understand their market before we pitch.</p><p class="say muted">Sounds like<q>"Admissions teams don't need more enquiries in May. They need them in January."</q></p></div>
+      <div class="trait"><h4>Human</h4><p class="say">Respect what the client has built. Write like a sharp colleague, in plain English, with short sentences.</p><p class="say muted">Sounds like<q>"You've put a lot into building your business. Let's help more people discover it."</q></p></div>
+    </div>
+
+    <h3 class="sub">We are / we are not</h3>
+    <div class="tbl-wrap"><table>
+      <thead><tr><th>We are</th><th>We are not</th><th>Why it matters</th></tr></thead>
+      <tbody>
+        <tr><td><b>Confident</b></td><td>Cocky</td><td>Buyers trust the agency with a system, not the loudest one.</td></tr>
+        <tr><td><b>Specific</b></td><td>Technical for show</td><td>"Reply rate" is useful. "Omnichannel synergy" is noise.</td></tr>
+        <tr><td><b>Warm</b></td><td>Chummy</td><td>No "Hey buddy!" in a first message to a CEO.</td></tr>
+        <tr><td><b>Ambitious</b></td><td>Hyped</td><td>We promise a machine that compounds, not overnight 10X.</td></tr>
+        <tr><td><b>Honest</b></td><td>Defensive</td><td>When a channel underperforms, we say so first and explain the fix.</td></tr>
+      </tbody>
+    </table></div>
+
+    <h3 class="sub">Vocabulary</h3>
+    <div class="dd">
+      <div class="do"><h4>Say</h4><div class="words"><span>qualified meetings</span><span>booked</span><span>pipeline</span><span>decision-makers</span><span>verified data</span><span>system</span><span>sequence</span><span>reply rate</span><span>cost per lead</span><span>sales calendar</span><span>accounts</span><span>scale what converts</span></div></div>
+      <div class="dont"><h4>Avoid</h4><div class="words"><span>guaranteed results</span><span>leads galore</span><span>viral</span><span>growth hacking</span><span>synergy</span><span>10X overnight</span><span>cheap leads</span><span>blast</span><span>best agency in India</span><span>cutting-edge</span><span>solutions</span><span>!!!</span></div></div>
+    </div>
+
+    <h3 class="sub">Style rules</h3>
+    <div class="grid g2">
+      <div class="plain"><h4>Name</h4><p>Always <b>Fastex Media</b>: two words, capital F and M. "Fastex" is fine on second mention. Never FastEx, FASTEX MEDIA in running text, Fastex media or FM.</p></div>
+      <div class="plain"><h4>Numbers</h4><p>Always use numerals: 3 channels, 15 minutes. Multipliers take a capital X with no space (3X). Percentages take the symbol (60%). Currency comes first: ₹50,000 or $2,500.</p></div>
+      <div class="plain"><h4>Headlines</h4><p>Sentence case, 8 words or fewer and no full stop, unless it's one of the short punchy lines like "Three moves. One machine."</p></div>
+      <div class="plain"><h4>Spelling and dates</h4><p>US English spelling (optimize, color) in public copy. Write dates as 4 Oct 2026. Use the Oxford comma. Use emoji only on Instagram and WhatsApp, and never more than one.</p></div>
+    </div>
+
+    <h3 class="sub">Before and after</h3>
+    <div class="rewrite"><div class="before"><span class="tag no lbl">Before</span>We are a leading full-service digital marketing agency offering innovative, cutting-edge solutions for all your business needs!</div><div class="after"><span class="tag ok lbl">After</span>We build outbound systems that book qualified B2B meetings, and we report on one number: meetings booked.</div></div>
+    <div class="rewrite"><div class="before"><span class="tag no lbl">Before</span>Get unlimited leads guaranteed with our amazing LinkedIn growth hacks!</div><div class="after"><span class="tag ok lbl">After</span>We research the decision-makers in your market, reach them on LinkedIn and book the call for you.</div></div>
+    <div class="rewrite"><div class="before"><span class="tag no lbl">Before</span>Hi Sir, hope you are doing well. We are Fastex Media and we provide many services. Kindly check our website.</div><div class="after"><span class="tag ok lbl">After</span>Saw you're adding rooftop solar for factories in Gujarat. We book meetings with plant heads for EPCs like yours. Open to a 15-minute call next week?</div></div>
+  </section>
+
+  <!-- 03 TONE -->
+  <section class="ch" id="tone">
+    <div class="ch-head"><span class="ch-no">03</span><h2>Brand tone</h2><p>Same person, different rooms. Choose a context to see where the tone sits and how it sounds.</p></div>
+    <div class="tone-tabs" role="tablist" id="toneTabs"></div>
+    <div class="tone-panel" id="tonePanel" role="tabpanel">
+      <div class="dial" id="toneDial"></div>
+      <div><p class="eyebrow" id="toneCtx">Context</p><p class="tone-sample" id="toneSample"></p><p class="tone-note" id="toneNote"></p></div>
+    </div>
+  </section>
+
+  <!-- 04 LOGO -->
+  <section class="ch" id="logo">
+    <div class="ch-head"><span class="ch-no">04</span><h2>Logo</h2><p>The FX mark is two letters doing one job: the F holds steady and the orange chevron drives forward through the X. Use the supplied files only, and never redraw it.</p></div>
+
+    <h3 class="sub" style="margin-top:0">Anatomy</h3>
+    <div class="diagram">
+      <svg viewBox="40 120 900 380" role="img" aria-label="Logo anatomy diagram">
+        <g class="dg-ink" style="color:var(--ink)"><use href="#fx" x="138" y="155" width="338" height="306"/></g>
+        <line class="dg-line" x1="160" y1="263" x2="160" y2="140"/><line class="dg-line" x1="160" y1="140" x2="560" y2="140"/>
+        <text class="dg-text" x="572" y="147">F bars: the stable foundation</text>
+        <line class="dg-line" x1="330" y1="230" x2="560" y2="230"/>
+        <text class="dg-text" x="572" y="226">Chevron: forward motion</text><text class="dg-small" x="572" y="252">Always Fastex Orange #FF6600</text>
+        <line class="dg-line" x1="440" y1="420" x2="560" y2="420"/>
+        <text class="dg-text" x="572" y="416">X arms: reach into the market</text>
+        <line class="dg-line" x1="360" y1="300" x2="560" y2="320"/>
+        <text class="dg-text" x="572" y="316">The gap between chevron and X</text><text class="dg-small" x="572" y="342">Never close it or fill it</text>
+        <text class="dg-acc" x="572" y="470">2 : 3 → 56.3°</text><text class="dg-small" x="700" y="470">every diagonal, one angle</text>
+      </svg>
+    </div>
+
+    <h3 class="sub">Variants</h3>
+    <div class="dl-size"><label for="pngSize">PNG size</label>
+      <select id="pngSize"><option value="512">512 px</option><option value="1024">1024 px</option><option value="2048" selected>2048 px</option><option value="4096">4096 px</option></select>
+      <span class="muted">PNG files have transparent backgrounds except the badge and tile. SVG is best for print and web.</span></div>
+    <div class="logo-grid" id="logoGrid"></div>
+
+    <h3 class="sub">Clear space and minimum size</h3>
+    <div class="grid g2">
+      <div class="diagram">
+        <svg viewBox="40 55 538 506" role="img" aria-label="Clear space diagram">
+          <rect x="78" y="95" width="458" height="426" class="dg-dash"/>
+          <g style="color:var(--ink)"><use href="#fx" x="138" y="155" width="338" height="306"/></g>
+          <line class="dg-line" x1="204" y1="140" x2="264" y2="140"/><line class="dg-line" x1="204" y1="132" x2="204" y2="148"/><line class="dg-line" x1="264" y1="132" x2="264" y2="148"/>
+          <text class="dg-acc" x="226" y="128">x</text>
+          <line class="dg-line" x1="78" y1="308" x2="138" y2="308"/><text class="dg-acc" x="100" y="298">x</text>
+          <line class="dg-line" x1="476" y1="308" x2="536" y2="308"/><text class="dg-acc" x="498" y="298">x</text>
+          <line class="dg-line" x1="307" y1="461" x2="307" y2="521"/><text class="dg-acc" x="318" y="500">x</text>
+        </svg>
+        <p class="cap"><b style="color:var(--ink)">x</b> is the width of the chevron stroke. Keep at least <b style="color:var(--ink)">1x</b> clear on every side of the mark, and <b style="color:var(--ink)">1.5x</b> around lockups. No text, edges or other logos inside this area.</p>
+      </div>
+      <div class="diagram" style="display:flex;flex-direction:column;justify-content:space-between;gap:24px">
+        <div class="minsize">
+          <figure><svg width="24" height="22" style="color:var(--ink)"><use href="#fx"/></svg>24 px · 8 mm<br>Mark</figure>
+          <figure><svg width="32" height="32"><use href="#fx-badge"/></svg>32 px<br>Badge, favicon</figure>
+          <figure><svg width="140" height="24" viewBox="0 0 1756 306" id="minLockup" style="color:var(--ink)"></svg>140 px · 35 mm<br>Horizontal lockup</figure>
+        </div>
+        <div class="prose" style="font-size:.92rem">
+          <p>Below these sizes, the gap between the chevron and the X closes up and the mark turns into a blob.</p>
+          <p>For favicons and app icons under 32 px, use the <b>dark badge</b>. Its solid circle holds up at small sizes.</p>
+        </div>
+      </div>
+    </div>
+
+    <h3 class="sub">Backgrounds</h3>
+    <div class="grid g4" id="bgGrid"></div>
+
+    <h3 class="sub">Misuse</h3>
+    <div class="misuse" id="misuse"></div>
+  </section>
+
+  <!-- 05 COLOUR -->
+  <section class="ch" id="colour">
+    <div class="ch-head"><span class="ch-no">05</span><h2>Colour</h2><p>Mostly paper and ink, with orange used sparingly so it stays a signal. Click any value to copy it.</p></div>
+    <div class="swatches" id="swatches"></div>
+
+    <h3 class="sub">Proportion</h3>
+    <div class="ratio" aria-label="Colour proportion">
+      <div style="flex:58;background:var(--fx-paper);color:var(--fx-ink)">Paper &amp; white 58%</div>
+      <div style="flex:30;background:var(--fx-ink);color:var(--fx-white)">Ink 30%</div>
+      <div style="flex:8;background:var(--fx-orange);color:var(--fx-ink)">Orange 8%</div>
+      <div style="flex:4;background:#63636B;color:#fff" title="Slate and Ember 4%">4%</div>
+    </div>
+    <p class="muted" style="font-size:.86rem;margin-top:10px">On any one layout, orange should cover less than about a tenth of the area. If everything is orange, nothing stands out.</p>
+
+    <h3 class="sub">Contrast rules (WCAG 2.1)</h3>
+    <div id="pairs"></div>
+    <div class="dd" style="margin-top:20px">
+      <div class="do"><h4>Do</h4><ul><li>Use Ink text on Fastex Orange for buttons and badges (6.6:1).</li><li>Use Ember for links and small accent text on light backgrounds.</li><li>Use Fastex Orange for text only on Ink, or at 24 px and above in the logo and graphics.</li></ul></div>
+      <div class="dont"><h4>Don't</h4><ul><li>Set white text on Fastex Orange. At 2.9:1 it fails accessibility.</li><li>Set orange body text on paper or white backgrounds (2.8:1).</li><li>Add gradients, tints or new hues to the logo.</li></ul></div>
+    </div>
+  </section>
+
+  <!-- 06 TYPE -->
+  <section class="ch" id="type">
+    <div class="ch-head"><span class="ch-no">06</span><h2>Typography</h2><p>Two free Google fonts, the same ones used on fastexmedia.com. Outfit gives a geometric display voice and Inter keeps long reading easy.</p></div>
+    <div class="specimen">
+      <div class="spec"><p class="eyebrow">Display · Outfit</p><p class="big" style="font-family:var(--f-display);font-weight:600">Aa 3X</p><p class="alpha" style="font-family:var(--f-display)">ABCDEFGHIJKLMNOPQRSTUVWXYZ<br>abcdefghijklmnopqrstuvwxyz 0123456789 ₹$%★</p><p class="muted" style="font-size:.86rem">Weights: Medium 500, SemiBold 600 (default), Bold 700 for big stats only. Use for headlines, stats, buttons on social and the wordmark.</p><a class="mono" href="https://fonts.google.com/specimen/Outfit" target="_blank" rel="noopener">fonts.google.com/specimen/Outfit ↗</a></div>
+      <div class="spec"><p class="eyebrow">Body · Inter</p><p class="big" style="font-family:var(--f-body);font-weight:500;font-size:clamp(3rem,7vw,4.6rem)">Aa</p><p style="font-size:.98rem">We map the market, build the system and scale what converts. Inter keeps paragraphs, tables and UI clear at any size.</p><p class="muted" style="font-size:.86rem">Weights: Regular 400, Medium 500, SemiBold 600. Use for body copy, UI, captions, emails and decks.</p><a class="mono" href="https://fonts.google.com/specimen/Inter" target="_blank" rel="noopener">fonts.google.com/specimen/Inter ↗</a></div>
+    </div>
+
+    <h3 class="sub">Type scale (web, base 16 px)</h3>
+    <div>
+      <div class="scale-row"><span class="meta">Display<br>64/1.0 · 600 · −3%</span><span class="s" style="font:600 clamp(2.4rem,6vw,4rem)/1 var(--f-display);letter-spacing:-.03em">Your calendar, full.</span></div>
+      <div class="scale-row"><span class="meta">H1<br>48/1.05 · 600 · −2%</span><span class="s" style="font:600 clamp(2rem,4.5vw,3rem)/1.05 var(--f-display);letter-spacing:-.02em">Three moves. One machine.</span></div>
+      <div class="scale-row"><span class="meta">H2<br>32/1.15 · 600 · −1.5%</span><span class="s" style="font:600 2rem/1.15 var(--f-display);letter-spacing:-.015em">Map the market</span></div>
+      <div class="scale-row"><span class="meta">H3<br>22/1.25 · 600</span><span class="s" style="font:600 1.375rem/1.25 var(--f-display)">Verified decision-maker data</span></div>
+      <div class="scale-row"><span class="meta">Body L<br>18/1.6 · 400</span><span class="s" style="font-size:1.125rem">We build outbound systems that book qualified B2B meetings.</span></div>
+      <div class="scale-row"><span class="meta">Body<br>16/1.6 · 400</span><span class="s">Every channel reports on one number: meetings booked.</span></div>
+      <div class="scale-row"><span class="meta">Label<br>12/1.2 · 500 · +12% caps</span><span class="s eyebrow" style="color:var(--ink)">Client result · Solar EPC</span></div>
+    </div>
+
+    <h3 class="sub">Rules</h3>
+    <div class="grid g3">
+      <div class="plain"><h4>Tight on top, open below</h4><p>Track headlines −1.5% to −3% and set body text at 1.6 line height. Keep body lines to about 65 characters.</p></div>
+      <div class="plain"><h4>Stats are the hero</h4><p>Set numbers in Outfit SemiBold or Bold, tabular, large and in orange on Ink. Put the label underneath in Inter.</p></div>
+      <div class="plain"><h4>Fallbacks</h4><p>If Outfit and Inter can't load (in Word, Gmail or PowerPoint), use Arial. Never use Times or Comic Sans, and never mix in a third typeface.</p></div>
+    </div>
+  </section>
+
+  <!-- 07 GRAPHICS -->
+  <section class="ch" id="graphics">
+    <div class="ch-head"><span class="ch-no">07</span><h2>Graphic language</h2><p>A small set of shapes taken from the mark itself, so every layout looks like Fastex even without the logo on it.</p></div>
+    <div class="grid g2">
+      <div class="cut-demo" aria-hidden="true"><div class="band" style="left:42%"></div><div class="band" style="left:calc(42% + 92px);opacity:.35"></div><span class="angle">56.3°</span><span class="lbl">The Fastex cut: 2 across, 3 down</span></div>
+      <div class="prose">
+        <h4 style="font-size:1.15rem">The 56° cut</h4>
+        <p>Every diagonal in the mark leans 2 units across for every 3 down. Use that same angle for image crops, colour bands, section dividers and motion paths. Never use 45°.</p>
+        <p class="muted">In CSS: <span class="mono">transform: skewX(33.69deg)</span>. In Figma or Illustrator: rotate 33.69° from vertical.</p>
+      </div>
+    </div>
+
+    <div class="grid g3" style="margin-top:28px">
+      <div class="card"><h4>Chevron marker</h4><p style="margin-bottom:12px">Use the chevron in place of bullets and arrows. Always point it forward (to the right).</p>
+        <ul class="chev-list" style="font-size:.9rem"><li>Map the market</li><li>Build the system</li><li>Scale what converts</li></ul></div>
+      <div class="card"><h4>Buttons</h4><p style="margin-bottom:14px">Pill shape (fully rounded). One primary button per screen.</p>
+        <div style="display:flex;flex-wrap:wrap;gap:8px"><span class="btn btn-orange btn-sm">Book a Free Strategy Call</span><span class="btn btn-ink btn-sm">See case studies</span><span class="btn btn-ghost btn-sm">View service →</span></div></div>
+      <div class="card"><h4>Icons</h4><p style="margin-bottom:12px">2 px line icons on a 24 px grid with rounded caps, in Ink. Use Ember for at most one icon per set.</p>
+        <div class="icons" aria-hidden="true">
+          <span class="acc"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4M9 15l2 2 4-4"/></svg></span>
+          <span><svg viewBox="0 0 24 24"><path d="M3 3v18h18"/><path d="M7 15l4-4 3 3 5-6"/></svg></span>
+          <span><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6"/></svg></span>
+          <span><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg></span>
+        </div></div>
+    </div>
+
+    <h3 class="sub">Imagery</h3>
+    <div class="dd">
+      <div class="do"><h4>Use</h4><ul><li>Real people at work: sales teams, founders, site visits, factory floors and campuses from our five industries.</li><li>Real product evidence: dashboards, calendars and reply screens with private data blurred.</li><li>Warm, natural light. Darken images with a 60 to 75% Ink overlay when text sits on top.</li><li>Crops along the 56° cut.</li></ul></div>
+      <div class="dont"><h4>Avoid</h4><ul><li>Stock handshakes, people pointing at screens, glowing brains and rocket ships.</li><li>Images that are recoloured orange. Orange belongs to graphics, not photos.</li><li>Busy backgrounds behind the logo.</li><li>Images of results that we can't back up.</li></ul></div>
+    </div>
+
+    <h3 class="sub">Layout grid</h3>
+    <div class="grid g3">
+      <div class="plain"><h4>8 px spacing</h4><p>All spacing comes in steps of 8 px: 8, 16, 24, 32, 48, 64, 96. On social, use 6 to 9% of the width as the outer margin.</p></div>
+      <div class="plain"><h4>12 columns</h4><p>Web uses 12 columns with a 24 px gutter and a 1200 px max width. Decks use the same grid at 1920 × 1080.</p></div>
+      <div class="plain"><h4>Corners</h4><p>Buttons and tags are pills. Cards use 16 px corners and photos use 12 px. Don't mix corner styles on one surface.</p></div>
+    </div>
+  </section>
+
+  <!-- 08 SOCIAL -->
+  <section class="ch" id="social">
+    <div class="ch-head"><span class="ch-no">08</span><h2>Social media guidelines</h2><p>LinkedIn is our main channel; Instagram, X and WhatsApp support it. These four templates cover most of what we post.</p></div>
+
+    <div class="mocks">
+      <figure class="mock"><div class="art r11 a-stat"><p class="ey">Client result · average</p><p class="n">60%</p><p class="t">lower cost per lead across client accounts</p><svg class="fxm" viewBox="138 155 338 306" style="color:#fff"><use href="#fx"/></svg><span class="h">fastexmedia.com</span></div><figcaption><b>Stat post · 1:1</b>One number, one line, Ink background. Use it for proof.</figcaption></figure>
+      <figure class="mock"><div class="art r45 a-quote"><div class="qm"></div><p class="q">"Fastex Media built a lead system that fills our sales calendar every week."</p><p class="by">Fastex Media client · B2B services</p><svg class="fxm" viewBox="138 155 338 306" style="color:#0D0D0D"><use href="#fx"/></svg></div><figcaption><b>Testimonial · 4:5</b>Real quotes only, approved in writing by the client.</figcaption></figure>
+      <figure class="mock"><div class="art r45 a-car"><p class="ix">01 / 07</p><p class="t">Three moves. One machine.</p><p class="s">How we book qualified B2B meetings, step by step.</p><svg class="fxm" viewBox="138 155 338 306" style="color:#0D0D0D"><use href="#fx-mono"/></svg><span class="sw">Swipe →</span></div><figcaption><b>Carousel cover · 4:5</b>Orange cover, Ink inside pages. 5 to 9 slides.</figcaption></figure>
+      <figure class="mock"><div class="art r916 a-story"><div class="band"></div><svg class="fxm" viewBox="138 155 338 306" style="color:#fff"><use href="#fx"/></svg><p class="t">Your sales calendar, full.</p><p class="cta">Book a free strategy call</p></div><figcaption><b>Story / Reel cover · 9:16</b>Keep the top and bottom 14% clear of text.</figcaption></figure>
+    </div>
+
+    <h3 class="sub">Platform specs</h3>
+    <div class="tbl-wrap"><table>
+      <thead><tr><th>Platform</th><th>Role</th><th>Feed sizes</th><th>Other sizes</th><th>Cadence</th></tr></thead>
+      <tbody>
+        <tr><td><b>LinkedIn</b><br><span class="muted">company + founder</span></td><td>Main channel. Authority and inbound.</td><td>1080 × 1350 (4:5) · 1200 × 1200 · Carousel PDF 1080 × 1350</td><td>Banner 1128 × 191 · Logo 400 × 400 · Link 1200 × 627</td><td>Company 3–4/wk · Founder 4–5/wk</td></tr>
+        <tr><td><b>Instagram</b><br><span class="muted">@fastexmedia_</span></td><td>Culture, proof, reels.</td><td>1080 × 1350 (4:5) · keep key content in the centre 3:4 for the grid</td><td>Stories/Reels 1080 × 1920 · Profile 320 × 320</td><td>3/wk + stories daily</td></tr>
+        <tr><td><b>X</b><br><span class="muted">@shahaagamn</span></td><td>Founder voice, quick insights.</td><td>1600 × 900 (16:9) · 1080 × 1080</td><td>Header 1500 × 500 · Profile 400 × 400</td><td>1/day</td></tr>
+        <tr><td><b>WhatsApp Business</b></td><td>Conversations, follow-up, status.</td><td>Status 1080 × 1920</td><td>Profile 640 × 640 (badge) · Catalogue 1080 × 1080</td><td>Status 2–3/wk</td></tr>
+      </tbody>
+    </table></div>
+
+    <h3 class="sub">Content pillars and mix</h3>
+    <div class="grid g4">
+      <div class="card"><p class="eyebrow" style="color:var(--ember)">40%</p><h4 style="margin-top:6px">Proof</h4><p>Results, case studies, client wins, testimonials.</p></div>
+      <div class="card"><p class="eyebrow" style="color:var(--ember)">30%</p><h4 style="margin-top:6px">Playbooks</h4><p>How outbound works: sequences, subject lines, data tips.</p></div>
+      <div class="card"><p class="eyebrow" style="color:var(--ember)">20%</p><h4 style="margin-top:6px">Industry insight</h4><p>What buyers in solar, IT, manufacturing, education and real estate care about now.</p></div>
+      <div class="card"><p class="eyebrow" style="color:var(--ember)">10%</p><h4 style="margin-top:6px">Behind the machine</h4><p>Team, process, the office in Surat, lessons learned.</p></div>
+    </div>
+
+    <h3 class="sub">Caption formula: Hook, Proof, Insight, Ask</h3>
+    <div class="grid g2" style="align-items:start">
+      <div class="post">
+        <div class="post-head"><svg viewBox="0 0 616 616"><use href="#fx-badge"/></svg><div><b>Fastex Media</b><span>B2B Lead Generation Agency · 1d</span></div></div>
+        <div class="post-body">
+          <p><span class="lab">Hook</span>Most B2B pipelines don't have a lead problem. They have a follow-up problem.</p>
+          <p><span class="lab">Proof</span>Across our client accounts, more meetings come from touches 3 to 5 than from the first message.</p>
+          <p><span class="lab">Insight</span>So we build every sequence across LinkedIn, email and WhatsApp before we write a single word of copy.</p>
+          <p><span class="lab">Ask</span>How many touches does your team make before giving up?</p>
+        </div>
+      </div>
+      <div class="prose" style="font-size:.94rem">
+        <ul class="chev-list">
+          <li>The first 2 lines must work alone, because that's all people see before "…see more".</li>
+          <li>Keep lines short with white space between them. No walls of text.</li>
+          <li>Use 3 to 5 hashtags at the end: <span class="mono">#B2BMarketing #LeadGeneration #Outbound</span> plus one industry tag.</li>
+          <li>Tag the client only with written approval.</li>
+          <li>Put links in the first comment on LinkedIn, not in the post.</li>
+          <li>Reply to every comment within 2 working hours on the day of posting.</li>
+          <li>Every post template must include the mark or fastexmedia.com.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- 09 ADS -->
+  <section class="ch" id="ads">
+    <div class="ch-head"><span class="ch-no">09</span><h2>Ad guidelines</h2><p>Ads get one glance. Show one promise, one proof point and one action, and make it recognisably Fastex in under a second.</p></div>
+
+    <div class="grid g3">
+      <div class="plain"><h4>One message</h4><p>Each ad makes one promise. If you need "and", make it two ads.</p></div>
+      <div class="plain"><h4>Proof in the frame</h4><p>A number, an industry or a method should be visible without reading the caption.</p></div>
+      <div class="plain"><h4>Brand in the first second</h4><p>Ink + orange + Outfit, with the mark in a corner. For video, show the mark within 2 seconds and at the end.</p></div>
+    </div>
+
+    <h3 class="sub">Mock-ups</h3>
+    <div class="ad-wrap">
+      <div class="ad-li">
+        <div class="hd"><svg viewBox="0 0 616 616"><use href="#fx-badge"/></svg><div><b>Fastex Media</b><span>Promoted</span></div></div>
+        <p class="intro">Your SDRs shouldn't spend Monday building lists. We research decision-makers, run the outreach and put qualified meetings on your calendar.</p>
+        <div class="art r191 img"><div class="band"></div><p class="t">Your sales calendar, <em>full.</em></p><p class="s">Qualified B2B meetings · every week</p><svg class="fxm" viewBox="138 155 338 306" style="color:#fff"><use href="#fx"/></svg></div>
+        <div class="ft"><div><b>Book a free strategy call</b><span>fastexmedia.com</span></div><span class="btn">Learn more</span></div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:16px;min-width:0">
+        <div class="ad-g">
+          <p class="sp">Sponsored</p>
+          <div class="url"><svg viewBox="0 0 616 616"><use href="#fx-badge"/></svg><span>Fastex Media · fastexmedia.com/b2b-lead-generation</span></div>
+          <p class="h">B2B Lead Generation Agency | Qualified Meetings Booked | Free Strategy Call</p>
+          <p class="d">Multi-channel outbound across LinkedIn, email and WhatsApp. Verified decision-maker data. Reported on meetings booked.</p>
+        </div>
+        <div class="card"><h4>Formula: Pain, Proof, Prompt</h4><p><b style="color:var(--ink)">Pain:</b> "Your SDRs shouldn't spend Monday building lists." <b style="color:var(--ink)">Proof:</b> "3X average lead growth across client accounts." <b style="color:var(--ink)">Prompt:</b> "Book a free strategy call."</p></div>
+      </div>
+    </div>
+
+    <h3 class="sub">Specs and character limits</h3>
+    <div class="tbl-wrap"><table>
+      <thead><tr><th>Platform</th><th>Format</th><th>Image / video</th><th>Copy limits (aim for)</th></tr></thead>
+      <tbody>
+        <tr><td><b>LinkedIn</b></td><td>Single image</td><td>1200 × 627 · 1200 × 1200 · 720 × 900</td><td>Intro ~150 chars before "see more" · Headline ~70</td></tr>
+        <tr><td><b>LinkedIn</b></td><td>Document / carousel</td><td>1080 × 1350 PDF, 5–10 pages</td><td>Intro ~150 · first page works as a cover</td></tr>
+        <tr><td><b>LinkedIn</b></td><td>Lead gen form</td><td>As above</td><td>3–4 fields max · pre-fill from profile</td></tr>
+        <tr><td><b>Meta</b></td><td>Feed / Reels / Stories</td><td>1080 × 1350 · 1080 × 1920 · 1080 × 1080</td><td>Primary text 125 · Headline 40 · Description 30</td></tr>
+        <tr><td><b>Google Search</b></td><td>Responsive search ad</td><td>Assets: logo 1200 × 1200 &amp; 1200 × 300</td><td>Up to 15 headlines × 30 · 4 descriptions × 90 · Paths 2 × 15</td></tr>
+        <tr><td><b>Google Display / PMax</b></td><td>Responsive display</td><td>1200 × 628 · 1200 × 1200 · 960 × 1200</td><td>Short headline 30 · Long headline 90 · Description 90</td></tr>
+      </tbody>
+    </table></div>
+    <p class="muted" style="font-size:.82rem;margin-top:8px">Platforms change their specs. Check the platform's own help page before each campaign launch.</p>
+
+    <h3 class="sub">CTA library</h3>
+    <div class="words" style="gap:8px">
+      <span class="btn btn-orange btn-sm">Book a Free Strategy Call</span><span class="btn btn-ghost btn-sm">See case studies</span><span class="btn btn-ghost btn-sm">Get the playbook</span><span class="btn btn-ghost btn-sm">Map my market</span><span class="btn btn-ghost btn-sm">Talk to us on WhatsApp</span><span class="btn btn-ghost btn-sm">View service →</span>
+    </div>
+
+    <h3 class="sub">Claims and compliance</h3>
+    <div class="dd">
+      <div class="do"><h4>Do</h4><ul><li>Call every figure an average and say what it's an average of: "3X average lead growth across client accounts".</li><li>Keep a source sheet for every number used in an ad.</li><li>Get written approval before naming a client or using their logo.</li><li>Only use WhatsApp ads that click to chat with people who have opted in.</li></ul></div>
+      <div class="dont"><h4>Don't</h4><ul><li>Say "guaranteed leads", "guaranteed ROI" or give a fixed meeting count without contract terms behind it.</li><li>Use competitor names or trademarks in ad copy or keywords without legal review.</li><li>Fake urgency: "only 2 spots left" unless it's true.</li><li>Put more than about 20% text on paid images. They reach fewer people.</li></ul></div>
+    </div>
+  </section>
+
+  <!-- 10 MARKETING -->
+  <section class="ch" id="marketing">
+    <div class="ch-head"><span class="ch-no">10</span><h2>Marketing guidelines</h2><p>How we take the brand to market: what we say to whom, on which channel and how we measure it.</p></div>
+
+    <h3 class="sub" style="margin-top:0">Messaging house</h3>
+    <div class="house">
+      <div class="roof"><p class="eyebrow">Brand promise</p><p>Qualified meetings on your sales calendar. Every week.</p></div>
+      <div class="pillars">
+        <div><b>Market mapped</b><span>We define the accounts and verify every decision-maker before outreach.</span></div>
+        <div><b>Multi-channel system</b><span>LinkedIn, cold email, WhatsApp and paid, working as one sequence.</span></div>
+        <div><b>Measured on meetings</b><span>One number in every report: qualified meetings booked.</span></div>
+        <div><b>Industry depth</b><span>Five sectors we know well. We already know who signs.</span></div>
+      </div>
+      <div class="base"><b>Proof:</b> 13+ active brands · 3X average lead growth · 60% average CPL reduction · 4.9★ client satisfaction</div>
+    </div>
+
+    <h3 class="sub">Industry messaging matrix</h3>
+    <div class="tbl-wrap"><table>
+      <thead><tr><th>Industry</th><th>Who signs</th><th>Their pain</th><th>Our message</th><th>Lead channel</th></tr></thead>
+      <tbody>
+        <tr><td><b>IT &amp; Software</b></td><td>Founder, VP Sales, CRO</td><td>SDR time lost to research; long sales cycles</td><td>"Your SDRs sell. We fill their calendar."</td><td>LinkedIn + cold email</td></tr>
+        <tr><td><b>Solar &amp; Renewable</b></td><td>EPC owner, BD head</td><td>Commercial rooftop buyers are hard to reach</td><td>"Meetings with plant heads, not tyre-kickers."</td><td>LinkedIn + WhatsApp</td></tr>
+        <tr><td><b>Manufacturing</b></td><td>MD, export manager</td><td>Relies on trade fairs and referrals</td><td>"A trade fair's worth of buyer meetings, every month."</td><td>Cold email + LinkedIn</td></tr>
+        <tr><td><b>Education</b></td><td>Director, admissions head</td><td>Enquiries arrive too late in the cycle</td><td>"Fill next year's intake before the rush."</td><td>Meta + WhatsApp</td></tr>
+        <tr><td><b>Real Estate</b></td><td>Developer, sales head</td><td>Low-quality portal leads, slow follow-up</td><td>"Qualified site visits, followed up in minutes."</td><td>Meta + Google + WhatsApp</td></tr>
+      </tbody>
+    </table></div>
+
+    <h3 class="sub">Funnel and KPIs</h3>
+    <div class="funnel">
+      <div><b>Reach</b><span>Ads, LinkedIn content, cold email first touch</span><span>Cost per 1,000 · ICP match</span></div>
+      <div><b>Engage</b><span>Replies, comments, profile visits, clicks</span><span>Reply rate · CTR</span></div>
+      <div><b>Converse</b><span>Positive replies, WhatsApp chats, form fills</span><span>Positive reply rate · CPL</span></div>
+      <div><b>Meet</b><span>Qualified meeting booked and held</span><span>Cost per meeting · show rate</span></div>
+      <div><b>Pipeline</b><span>Opportunity created in the client's CRM</span><span>Pipeline value · win rate</span></div>
+    </div>
+    <p class="muted" style="font-size:.86rem;margin-top:10px">The headline number in every report is <b style="color:var(--ink)">qualified meetings booked</b>. Everything else explains it.</p>
+
+    <h3 class="sub">Cold email and WhatsApp</h3>
+    <div class="grid g2" style="align-items:start">
+      <div class="email">
+        <div class="meta"><span>Subject</span><b>plant heads in vapi</b><span style="margin-top:6px">To: owner@example-epc.in</span></div>
+        <div class="bd">
+          <p>Hi Rakesh,</p>
+          <p>Saw Sunrise EPC just finished a 2 MW rooftop for a textile unit in Vapi. Nice project.</p>
+          <p>We book meetings with plant heads at factories with high power bills, so EPCs like yours spend time quoting instead of prospecting.</p>
+          <p>Open to a 15-minute call on Thursday?</p>
+          <p>Aagam<br><span class="muted">Fastex Media · fastexmedia.com</span></p>
+        </div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:14px;min-width:0">
+        <div class="wa" aria-label="WhatsApp example">
+          <div class="msg">Hi, saw your ad. How does the LinkedIn lead gen work?</div>
+          <div class="msg me">Hi Priya, thanks for asking. We research the decision-makers you want, reach them on LinkedIn and book the call for you. Here's a 2-minute case study from an IT services client.</div>
+          <div class="msg me">Want me to hold Thursday 11am for a quick call?</div>
+          <div class="qr"><span>Yes, book it</span><span>Another time</span></div>
+        </div>
+        <ul class="chev-list" style="font-size:.9rem">
+          <li><b>Email:</b> plain text, under 90 words, one ask, no attachments on the first touch. Lowercase subject of 2 to 4 words.</li>
+          <li><b>Email:</b> open with something real about them. Never "Hope you are doing well."</li>
+          <li><b>WhatsApp:</b> opted-in contacts only, using approved templates. Reply within 5 minutes in business hours.</li>
+          <li><b>WhatsApp:</b> 3 short lines or fewer per message. Use quick-reply buttons for the next step.</li>
+        </ul>
+      </div>
+    </div>
+    <p class="muted" style="font-size:.82rem;margin-top:10px">Names and companies above are examples only.</p>
+
+    <h3 class="sub">Case study format</h3>
+    <div class="grid g4">
+      <div class="card"><p class="eyebrow">Client</p><p style="margin-top:6px">Industry, size and market, plus a logo if approved.</p></div>
+      <div class="card"><p class="eyebrow">Challenge</p><p style="margin-top:6px">One sentence in the client's words.</p></div>
+      <div class="card"><p class="eyebrow">System</p><p style="margin-top:6px">Channels, data and sequence: the three moves.</p></div>
+      <div class="card"><p class="eyebrow">Result</p><p style="margin-top:6px">Meetings, CPL and pipeline over a stated time period, with a quote.</p></div>
+    </div>
+
+    <h3 class="sub">Before you publish</h3>
+    <ul class="check" id="checklist">
+      <li><label><input type="checkbox" id="ck1">Does it make one clear promise?</label></li>
+      <li><label><input type="checkbox" id="ck2">Is every number sourced and described as an average?</label></li>
+      <li><label><input type="checkbox" id="ck3">Does it use the official logo file, with clear space around it?</label></li>
+      <li><label><input type="checkbox" id="ck4">Is orange under 10% of the layout, with no white-on-orange text?</label></li>
+      <li><label><input type="checkbox" id="ck5">Is it set in Outfit and Inter only?</label></li>
+      <li><label><input type="checkbox" id="ck6">Is it free of the avoid list ("guaranteed", "viral", "!!!")?</label></li>
+      <li><label><input type="checkbox" id="ck7">Is client approval in writing, if a client is named?</label></li>
+      <li><label><input type="checkbox" id="ck8">Is there one CTA that matches the CTA library?</label></li>
+    </ul>
+    <p class="muted" id="checkCount" style="font-size:.86rem;margin-top:10px">0 of 8 checked</p>
+  </section>
+
+  <!-- 11 DOWNLOADS -->
+  <section class="ch" id="downloads">
+    <div class="ch-head"><span class="ch-no">11</span><h2>Downloads</h2><p>Every logo as vector SVG and PNG, plus colour tokens and the prompt used to build this kit.</p></div>
+    <div class="dl-hero"><div class="band"></div><div><h3>Full brand kit</h3><p>One ZIP: 10 SVG logos, 10 PNGs at the size picked below, the original artwork, CSS and JSON colour tokens, and the master prompt.</p></div><button class="btn btn-orange" type="button" id="zipBtn">Download ZIP</button></div>
+    <div class="dl-size" style="margin-top:20px"><label for="pngSize2">PNG size</label>
+      <select id="pngSize2"><option value="512">512 px</option><option value="1024">1024 px</option><option value="2048" selected>2048 px</option><option value="4096">4096 px</option></select></div>
+    <div class="files" id="files"></div>
+  </section>
+
+  <!-- 12 PROMPT -->
+  <section class="ch" id="prompt">
+    <div class="ch-head"><span class="ch-no">12</span><h2>The prompt</h2><p>The brief used to generate this kit. Paste it into Claude with the two logo files to rebuild or extend the guidelines.</p></div>
+    <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px"><button class="btn btn-ink btn-sm" type="button" id="copyPrompt">Copy prompt</button><button class="btn btn-ghost btn-sm" type="button" id="dlPrompt">Download .md</button></div>
+    <pre class="prompt" id="promptText"><!--__PROMPT__--></pre>
+  </section>
+
+  <footer>
+    <span>© 2026 Fastex Media. Engineered for B2B scale.</span>
+    <span class="ct"><span>hello@fastexmedia.com</span><span>+91 93286 80929</span><span>The Junomoneta Tower, Surat, Gujarat</span><a href="https://www.fastexmedia.com" target="_blank" rel="noopener">fastexmedia.com ↗</a></span>
+  </footer>
+  </div>
+</main>
+</div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+<script>
+/*__BRAND_ASSETS__*/
+(function(){
+const $ = (s, r=document) => r.querySelector(s);
+const $$ = (s, r=document) => [...r.querySelectorAll(s)];
+const LOGOS = BRAND_ASSETS.logos;
+const byId = Object.fromEntries(LOGOS.map(l => [l.id, l]));
+
+/* ---------- toast + copy ---------- */
+let tt;
+function toast(msg){ const t=$('#toast'); t.textContent=msg; t.classList.add('show'); clearTimeout(tt); tt=setTimeout(()=>t.classList.remove('show'),2600); }
+async function copy(text){
+  try{ await navigator.clipboard.writeText(text); toast('Copied ' + (text.length>40 ? 'to clipboard' : text)); }
+  catch(e){ const ta=document.createElement('textarea'); ta.value=text; document.body.appendChild(ta); ta.select(); try{document.execCommand('copy'); toast('Copied');}catch(_){toast('Select the text and copy it manually');} ta.remove(); }
+}
+
+/* ---------- theme toggle ---------- */
+const root=document.documentElement, tb=$('#themeBtn');
+function curTheme(){ return root.dataset.theme || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'); }
+function syncThemeBtn(){ tb.textContent = curTheme()==='dark' ? 'Switch to light' : 'Switch to dark'; }
+try{ const s=localStorage.getItem('fx-theme'); if(s) root.dataset.theme=s; }catch(e){}
+syncThemeBtn();
+tb.addEventListener('click',()=>{ root.dataset.theme = curTheme()==='dark' ? 'light' : 'dark'; try{localStorage.setItem('fx-theme',root.dataset.theme);}catch(e){} syncThemeBtn(); });
+
+/* ---------- active chapter in the rail ---------- */
+const links=$$('#toc a'); const secs=links.map(a=>$(a.getAttribute('href')));
+const io=new IntersectionObserver(es=>{ es.forEach(e=>{ if(e.isIntersecting){ links.forEach(a=>a.classList.toggle('on', a.getAttribute('href')==='#'+e.target.id)); const on=links.find(a=>a.classList.contains('on')); if(on && innerWidth<=900) on.scrollIntoView({block:'nearest',inline:'center'}); } }); },{rootMargin:'-30% 0px -60% 0px'});
+secs.forEach(s=>s&&io.observe(s));
+
+/* ---------- tone ---------- */
+const AXES=[['Casual','Formal'],['Playful','Serious'],['Reserved','Bold'],['Simple','Technical']];
+const TONE=[
+ {k:'Website',v:[55,65,75,35],s:"You've put a lot into building your business. Let's help more people discover it.",n:"Confident and welcoming. Lead with the outcome, back it with a number, end with one clear CTA."},
+ {k:'LinkedIn',v:[40,55,80,45],s:"Most B2B pipelines don't have a lead problem. They have a follow-up problem.",n:"Opinionated and useful. Take a clear position, then share the playbook. Write as a practitioner, not a brand."},
+ {k:'Cold email',v:[35,60,40,20],s:"Saw you're adding rooftop solar for factories in Gujarat. We book meetings with plant heads for EPCs like yours. Worth 15 minutes next week?",n:"Brief and personal. Under 90 words, about them rather than us, one ask. Reads like a colleague, not a campaign."},
+ {k:'WhatsApp',v:[20,45,35,10],s:"Hi Priya, thanks for reaching out. Here's the case study you asked for. Want me to hold Thursday 11am for a quick call?",n:"Friendly and quick. Use first names and short lines, and always suggest the next step."},
+ {k:'Ads',v:[35,50,90,20],s:"Your sales calendar, full. Qualified B2B meetings, every week.",n:"Bold and spare. One promise, one proof point, one action, readable in a single glance."},
+ {k:'Sales & proposals',v:[65,70,60,60],s:"In the first 14 days we map your market. From week 3 you get one number every Friday: meetings booked.",n:"Assured and precise. Show the method, the timeline and the reporting. No adjectives where a date will do."},
+ {k:'Client reporting',v:[70,80,30,70],s:"This week: 9 meetings booked, 2 more than last week. LinkedIn drove 6, so we're moving budget from Meta to LinkedIn on Monday.",n:"Factual and calm. Start with the headline number, then the reason, then what changes next."},
+ {k:'When things go wrong',v:[60,90,20,40],s:"Reply rates dropped because a sending domain was flagged. We've paused it, moved volume to two warmed domains and expect recovery by Wednesday.",n:"Own it first. Say what happened, what we've done and when it will be fixed. No excuses and no jargon."}
+];
+const tabs=$('#toneTabs');
+TONE.forEach((t,i)=>{ const b=document.createElement('button'); b.type='button'; b.setAttribute('role','tab'); b.id='tone-'+i; b.textContent=t.k; b.setAttribute('aria-selected', i===0); b.addEventListener('click',()=>showTone(i)); tabs.appendChild(b); });
+$('#toneDial').innerHTML=AXES.map((a,i)=>`<div class="dial-row"><div class="ends"><span>${a[0]}</span><span>${a[1]}</span></div><div class="track"><span class="dot" id="dot${i}"></span></div></div>`).join('');
+function showTone(i){ const t=TONE[i]; $$('#toneTabs button').forEach((b,j)=>b.setAttribute('aria-selected', j===i)); t.v.forEach((v,j)=>$('#dot'+j).style.left=v+'%'); $('#toneCtx').textContent=t.k; $('#toneSample').textContent='"'+t.s+'"'; $('#toneNote').textContent=t.n; }
+showTone(0);
+
+/* ---------- logo cards ---------- */
+const stageCls = id => id.includes('lockup-horizontal') ? 'wide' : (id.includes('avatar') ? 'tile' : (id.includes('stacked') ? 'tile' : 'mark'));
+$('#logoGrid').innerHTML = LOGOS.map(l=>`
+  <article class="logo-card"><div class="logo-stage ${l.bg} ${stageCls(l.id)}">${l.svg}</div>
+  <div class="logo-info"><div><h4>${l.name}</h4><p>${l.use}</p></div>
+  <div class="acts"><button class="chip" type="button" data-dl="${l.id}" data-fmt="svg">SVG</button><button class="chip" type="button" data-dl="${l.id}" data-fmt="png">PNG</button></div></div></article>`).join('');
+{ const ml=$('#minLockup'), src=byId['fx-lockup-horizontal'].svg; ml.setAttribute('viewBox', src.match(/viewBox="([^"]+)"/)[1]); ml.innerHTML = src.replace(/^<svg[^>]*>|<\/svg>$/g,''); }
+
+/* backgrounds */
+const BGS=[
+ {bg:'#FBFAF8',id:'fx-mark-primary',ok:true,t:'Paper or white: primary mark'},
+ {bg:'#0D0D0D',id:'fx-mark-reversed',ok:true,t:'Ink or dark photo: reversed mark'},
+ {bg:'#FF6600',id:'fx-mark-black',ok:true,t:'Orange: one-colour black'},
+ {bg:'linear-gradient(135deg,#7a7f88,#c9b9a6 45%,#3d4450)',id:'fx-mark-primary',ok:false,t:'Busy or mid-tone photo: use a dark overlay'}
+];
+$('#bgGrid').innerHTML=BGS.map(b=>`<figure class="misuse" style="display:block;margin:0"><div style="border:1px solid var(--line);border-radius:14px;overflow:hidden;background:var(--raised)"><div style="aspect-ratio:4/3;display:grid;place-items:center;background:${b.bg}"><div style="height:46%;display:flex">${byId[b.id].svg.replace('<svg ','<svg style="height:100%;width:auto" ')}</div></div><p style="padding:10px 12px;font-size:.82rem;margin:0;display:flex;gap:8px;align-items:flex-start"><span class="tag ${b.ok?'ok':'no'}">${b.ok?'Yes':'No'}</span>${b.t}</p></div></figure>`).join('');
+
+/* misuse */
+const M=(t,inner,bg)=>`<figure><div class="ms" style="${bg||''}">${inner}</div><figcaption>${t}</figcaption></figure>`;
+const mk=(style,ch)=>`<svg viewBox="138 155 338 306" style="color:#0D0D0D;${style||''}"><path fill="currentColor" d="M138 241H261.33L290.67 285H138ZM138 330H291.33L262 374H181V461H138Z"/><path fill="currentColor" d="M416 155H476L380.5 298.25L350.5 253.25ZM416 461H476L380.5 317.75L350.5 362.75Z"/><path fill="${ch||'#FF6600'}" d="M204 155H264L366 308L264 461H204L306 308Z"/></svg>`;
+$('#misuse').innerHTML=[
+  M('Don\'t stretch or squash it', mk('transform:scaleX(1.55)')),
+  M('Don\'t rotate it', mk('transform:rotate(-18deg)')),
+  M('Don\'t recolour the chevron', mk('', '#2B6BFF')),
+  M('Don\'t add shadows, glows or outlines', mk('filter:drop-shadow(6px 8px 0 rgba(255,102,0,.45)) drop-shadow(0 0 10px rgba(0,0,0,.35))')),
+  M('Don\'t flip the chevron backwards', mk('transform:scaleX(-1)')),
+  M('Don\'t place it on low-contrast colour', mk('opacity:.9','#FF6600'), 'background:#C94A00')
+].join('');
+
+/* ---------- colour ---------- */
+const SW=[
+ {n:'Fastex Orange',r:'Logo chevron, highlights, primary buttons. Signal, not surface.',hex:'#FF6600',rgb:'255 102 0',cmyk:'0 60 100 0',extra:['Pantone','≈ 1505 C'],fg:'#0D0D0D'},
+ {n:'Ink',r:'Text, logo, dark backgrounds.',hex:'#0D0D0D',rgb:'13 13 13',cmyk:'0 0 0 95',fg:'#FFFFFF'},
+ {n:'Paper',r:'Default page background.',hex:'#FBFAF8',rgb:'251 250 248',cmyk:'0 0 1 2',fg:'#0D0D0D'},
+ {n:'Ember',r:'Accessible orange for links and small text on light.',hex:'#C94A00',rgb:'201 74 0',cmyk:'0 63 100 21',fg:'#FFFFFF'},
+ {n:'Slate',r:'Secondary text, captions, metadata.',hex:'#63636B',rgb:'99 99 107',cmyk:'7 7 0 58',fg:'#FFFFFF'}
+];
+$('#swatches').innerHTML=SW.map(s=>`<div class="sw"><div class="sw-chip" style="background:${s.hex};color:${s.fg};${s.hex==='#FBFAF8'?'box-shadow:inset 0 -1px 0 var(--line)':''}">${s.n}</div><div class="sw-body"><p class="role">${s.r}</p>
+ ${[['HEX',s.hex],['RGB',s.rgb],['CMYK',s.cmyk]].concat(s.extra?[s.extra]:[]).map(([k,v])=>`<div class="code-row"><span>${k}</span><button class="copy" type="button" data-copy="${v}">${v}</button></div>`).join('')}</div></div>`).join('');
+const PAIRS=[
+ ['#0D0D0D','#FBFAF8','Ink on Paper','Body text, headlines','18.6:1','AAA'],
+ ['#FFFFFF','#0D0D0D','White on Ink','Reversed text, dark sections','19.4:1','AAA'],
+ ['#0D0D0D','#FF6600','Ink on Orange','Buttons, badges, carousel covers','6.6:1','AA'],
+ ['#FF6600','#0D0D0D','Orange on Ink','Stats and highlights on dark','6.6:1','AA'],
+ ['#63636B','#FBFAF8','Slate on Paper','Captions and secondary text','5.7:1','AA'],
+ ['#C94A00','#FBFAF8','Ember on Paper','Links and small accent text','4.5:1','AA'],
+ ['#FFFFFF','#FF6600','White on Orange','Not allowed for text','2.9:1','Fail'],
+ ['#FF6600','#FBFAF8','Orange on Paper','Graphics and the logo only, never text','2.8:1','Fail']
+];
+$('#pairs').innerHTML=PAIRS.map(p=>`<div class="pair"><div class="aa" style="color:${p[0]};background:${p[1]}">Aa</div><p><b>${p[2]}</b><small>${p[3]}</small></p><div class="r">${p[4]} <span class="tag ${p[5]==='Fail'?'no':'ok'}">${p[5]}</span></div></div>`).join('');
+
+/* ---------- copy handlers ---------- */
+document.addEventListener('click',e=>{ const c=e.target.closest('[data-copy]'); if(c) copy(c.dataset.copy); });
+
+/* ---------- downloads ---------- */
+const dlReady = (window.claude && typeof window.claude.use==='function') ? window.claude.use('downloads').catch(()=>null) : Promise.resolve(undefined);
+async function saveFile(filename, data, mime){
+  const dl = await dlReady;
+  if(dl){
+    try{ await dl.save({filename, data}); toast('Saved ' + filename); }
+    catch(e){ if(e && e.code==='declined') return; if(e && e.code==='rate_limited'){ toast('A save is already waiting for you. Finish it first.'); return; } toast('Couldn\'t save ' + filename + ' here.'); }
+    return;
+  }
+  if(dl===null){ toast('Downloads aren\'t available in this view. Open the page in a browser to save files.'); return; }
+  const blob = data instanceof Blob ? data : new Blob([data],{type:mime||'application/octet-stream'});
+  const url=URL.createObjectURL(blob); const a=document.createElement('a'); a.href=url; a.download=filename; document.body.appendChild(a); a.click(); a.remove(); setTimeout(()=>URL.revokeObjectURL(url),4000);
+  toast('Downloading ' + filename);
+}
+function pngBlob(svg, size){
+  return new Promise((res,rej)=>{
+    const vb=(svg.match(/viewBox="([^"]+)"/)||[])[1].split(/\s+/).map(Number); const w=vb[2], h=vb[3];
+    const sc=size/Math.max(w,h); const cw=Math.round(w*sc), ch=Math.round(h*sc);
+    const sized=svg.replace('<svg ',`<svg width="${cw}" height="${ch}" `);
+    const img=new Image();
+    img.onload=()=>{ const c=document.createElement('canvas'); c.width=cw; c.height=ch; c.getContext('2d').drawImage(img,0,0,cw,ch); c.toBlob(b=>b?res(b):rej(new Error('png')),'image/png'); };
+    img.onerror=rej; img.src='data:image/svg+xml;charset=utf-8,'+encodeURIComponent(sized);
+  });
+}
+const sizeSel=[$('#pngSize'),$('#pngSize2')];
+sizeSel.forEach(s=>s.addEventListener('change',()=>sizeSel.forEach(o=>o.value=s.value)));
+const pngSize=()=>+$('#pngSize').value;
+
+const TOKENS_CSS=`/* Fastex Media brand tokens v1.0 */
+:root{
+  --fx-orange:#FF6600;   /* Fastex Orange: logo, highlights, primary buttons */
+  --fx-ember:#C94A00;    /* accessible orange for text on light */
+  --fx-ink:#0D0D0D;      /* text, logo, dark backgrounds */
+  --fx-paper:#FBFAF8;    /* page background */
+  --fx-slate:#63636B;    /* secondary text */
+  --fx-white:#FFFFFF;
+  --fx-font-display:"Outfit",Arial,sans-serif;
+  --fx-font-body:"Inter",Arial,sans-serif;
+  --fx-radius-pill:100px; --fx-radius-card:16px; --fx-radius-image:12px;
+  --fx-space:8px;
+  --fx-diagonal:33.69deg; /* skewX angle of the Fastex cut (2:3) */
+}
+`;
+const TOKENS_JSON=JSON.stringify({name:'Fastex Media',version:'1.0',color:{orange:'#FF6600',ember:'#C94A00',ink:'#0D0D0D',paper:'#FBFAF8',slate:'#63636B',white:'#FFFFFF'},font:{display:'Outfit',body:'Inter'},radius:{pill:100,card:16,image:12},spaceUnit:8,diagonalDeg:33.69},null,2);
+const PROMPT=$('#promptText').textContent;
+
+async function dlLogo(id, fmt){
+  const l=byId[id]; if(!l) return;
+  if(fmt==='svg') return saveFile(id+'.svg', l.svg, 'image/svg+xml');
+  try{ const b=await pngBlob(l.svg, pngSize()); return saveFile(`${id}-${pngSize()}.png`, b, 'image/png'); }
+  catch(e){ toast('Couldn\'t render the PNG. Try the SVG instead.'); }
+}
+document.addEventListener('click',e=>{ const b=e.target.closest('[data-dl]'); if(b) dlLogo(b.dataset.dl, b.dataset.fmt); });
+
+const FILES=[...LOGOS.map(l=>({n:l.name,s:l.use,acts:[['SVG',()=>dlLogo(l.id,'svg')],['PNG',()=>dlLogo(l.id,'png')]]})),
+ {n:'Colour tokens',s:'CSS custom properties and JSON for developers and Figma plugins',acts:[['CSS',()=>saveFile('fastex-tokens.css',TOKENS_CSS,'text/css')],['JSON',()=>saveFile('fastex-tokens.json',TOKENS_JSON,'application/json')]]},
+ ...Object.keys(BRAND_ASSETS.originals).map(k=>({n:'Original artwork · '+k,s:'The 616 px PNG master as supplied',acts:[['PNG',()=>saveFile(k,b64(BRAND_ASSETS.originals[k]),'image/png')]]}))];
+function b64(s){ const bin=atob(s); const u=new Uint8Array(bin.length); for(let i=0;i<bin.length;i++)u[i]=bin.charCodeAt(i); return new Blob([u],{type:'image/png'}); }
+const fl=$('#files');
+FILES.forEach(f=>{ const row=document.createElement('div'); row.className='file'; row.innerHTML=`<div><b>${f.n}</b><small>${f.s}</small></div><div class="acts"></div>`; f.acts.forEach(([lbl,fn])=>{ const b=document.createElement('button'); b.type='button'; b.className='chip'; b.textContent=lbl; b.addEventListener('click',fn); row.lastElementChild.appendChild(b); }); fl.appendChild(row); });
+
+$('#zipBtn').addEventListener('click', async ()=>{
+  if(typeof JSZip==='undefined'){ toast('The ZIP tool didn\'t load. Download files one by one below.'); return; }
+  const btn=$('#zipBtn'); btn.disabled=true; const old=btn.textContent; btn.textContent='Building ZIP…';
+  try{
+    const z=new JSZip(), size=pngSize();
+    for(const l of LOGOS){ z.file(`svg/${l.id}.svg`, l.svg); z.file(`png/${l.id}-${size}.png`, await pngBlob(l.svg,size)); }
+    for(const k of Object.keys(BRAND_ASSETS.originals)) z.file('original/'+k, BRAND_ASSETS.originals[k], {base64:true});
+    z.file('tokens/fastex-tokens.css', TOKENS_CSS); z.file('tokens/fastex-tokens.json', TOKENS_JSON);
+    z.file('BRANDKIT_PROMPT.md', PROMPT);
+    z.file('README.txt', 'Fastex Media brand kit v1.0\n\nsvg/  vector logos (use these whenever possible)\npng/  raster logos at '+size+' px\noriginal/  artwork as supplied\ntokens/  colours and fonts for developers\n\nFonts: Outfit and Inter, free at fonts.google.com\nQuestions: hello@fastexmedia.com\n');
+    const blob=await z.generateAsync({type:'blob'});
+    await saveFile('fastex-media-brand-kit.zip', blob, 'application/zip');
+  }catch(e){ toast('Couldn\'t build the ZIP. Download files one by one below.'); }
+  btn.disabled=false; btn.textContent=old;
+});
+$('#copyPrompt').addEventListener('click',()=>copy(PROMPT));
+$('#dlPrompt').addEventListener('click',()=>saveFile('BRANDKIT_PROMPT.md',PROMPT,'text/markdown'));
+
+/* ---------- checklist ---------- */
+const cks=$$('#checklist input');
+const upd=()=>{ const n=cks.filter(c=>c.checked).length; $('#checkCount').textContent = n===cks.length ? 'All 8 checked. Ready to publish.' : `${n} of ${cks.length} checked`; };
+cks.forEach(c=>c.addEventListener('change',upd));
+})();
+</script>
