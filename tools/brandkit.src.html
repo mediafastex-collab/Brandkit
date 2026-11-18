@@ -15,9 +15,9 @@
   --font-sans:"Inter","Inter Fallback",system-ui,-apple-system,"Segoe UI",sans-serif;
   --f-display:var(--font-serif);
   --f-body:var(--font-sans);
-  --fs-display:clamp(2.75rem,5vw + 1rem,4.8rem); --fs-h2:clamp(1.75rem,2vw + 1rem,2.3rem); --fs-h3:1.275rem;
+  --fs-display:clamp(2.75rem,7.5vw,6.75rem); --fs-h2:clamp(2rem,3.6vw,3.24rem); --fs-h3:1.6rem; --fs-lead:1.35rem; --fs-stat:clamp(2.2rem,3.2vw,2.88rem);
   --fs-body:1.125rem; --fs-eyebrow:.8rem; --fs-button:.93rem;
-  --lh-display:1.08; --lh-heading:1.15; --lh-body:1.6;
+  --lh-display:1.08; --lh-heading:1.08; --lh-body:1.6;
   --ls-display:-.015em; --ls-eyebrow:.12em; --ls-button:1px;
   --f-mono:"DM Mono",ui-monospace,"SF Mono",Menlo,Consolas,monospace;
   --diag:33.69deg;
@@ -94,7 +94,7 @@ a{color:var(--ember);text-underline-offset:3px}
 .page{min-height:60vh}
 .phero{padding-block:clamp(48px,8vw,96px) clamp(28px,4vw,40px)}
 .phero h1{font-size:var(--fs-display);letter-spacing:var(--ls-display);line-height:var(--lh-display);margin-top:16px}
-.phero .lede{max-width:58ch;font-size:1.1rem;color:var(--slate);margin-top:16px}
+.phero .lede{max-width:58ch;font-size:var(--fs-lead);color:var(--slate);margin-top:16px}
 .tabs{position:sticky;top:calc(var(--hdr) + env(safe-area-inset-top,0px));z-index:30;background:var(--paper);border-bottom:1px solid var(--line)}
 .tabs .wrap{display:flex;gap:28px;overflow-x:auto;scrollbar-width:none}
 .tabs .wrap::-webkit-scrollbar{display:none}
@@ -106,7 +106,7 @@ a{color:var(--ember);text-underline-offset:3px}
 .block{display:grid;grid-template-columns:minmax(0,250px) minmax(0,1fr);gap:20px clamp(32px,5vw,72px);padding-block:clamp(40px,6vw,64px);border-bottom:1px solid var(--line)}
 .subp > .block:last-child,.page > .wrap > .block:last-child{border-bottom:0}
 .bh{align-self:start;position:sticky;top:calc(var(--hdr) + 72px)}
-.bh h3{font-size:1.4rem}
+.bh h3{font-size:var(--fs-h3)}
 .bh p{font-size:.9rem;color:var(--slate);margin-top:8px;max-width:34ch}
 .bc{min-width:0}
 @media (max-width:860px){.block{grid-template-columns:minmax(0,1fr)}.bh{position:static}}
@@ -125,9 +125,9 @@ a{color:var(--ember);text-underline-offset:3px}
 .note{font-size:.82rem;color:var(--slate);margin-top:12px}
 
 /* ---------- overview ---------- */
-.home-hero{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:clamp(32px,5vw,72px);align-items:center;padding-block:clamp(48px,8vw,104px) clamp(40px,6vw,72px)}
+.home-hero{display:grid;grid-template-columns:minmax(0,1.45fr) minmax(0,.55fr);gap:clamp(32px,5vw,72px);align-items:center;padding-block:clamp(48px,8vw,104px) clamp(40px,6vw,72px)}
 .home-hero h1{font-size:var(--fs-display);letter-spacing:var(--ls-display);line-height:var(--lh-display);margin-top:18px}
-.home-hero .lede{max-width:48ch;font-size:1.12rem;color:var(--slate);margin-top:20px}
+.home-hero .lede{max-width:48ch;font-size:var(--fs-lead);color:var(--slate);margin-top:20px}
 .home-hero .ctas{display:flex;flex-wrap:wrap;gap:10px;margin-top:28px}
 .hero-art{position:relative;aspect-ratio:1/1;max-width:100%;border-radius:28px;background:#FFFFFF;border:1px solid var(--line);box-shadow:0 30px 60px -40px rgba(13,13,13,.35);overflow:hidden;display:grid;place-items:center}
 .hero-art .band{position:absolute;top:-10%;bottom:-10%;width:13%;background:var(--fx-orange);transform:skewX(var(--diag));opacity:.07}
@@ -152,7 +152,7 @@ a{color:var(--ember);text-underline-offset:3px}
 .fcard .vis svg{height:46%;width:auto;color:var(--ink)}
 .fcard .vis .q{font:400 clamp(1.5rem,2.8vw,2rem)/1.1 var(--f-display);letter-spacing:-.015em;text-align:left;width:100%}
 .fcard .tx{padding:20px 22px 22px;display:flex;flex-direction:column;gap:6px;flex:1}
-.fcard h3{font-size:1.3rem}
+.fcard h3{font-size:var(--fs-h3)}
 .fcard p{font-size:.9rem;color:var(--slate)}
 .fcard .go{margin-top:auto;padding-top:10px;font:600 .86rem var(--f-body);color:var(--ember)}
 .mini-dial{width:100%;display:flex;flex-direction:column;gap:14px}
@@ -172,13 +172,13 @@ a{color:var(--ember);text-underline-offset:3px}
 .stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border-block:1px solid var(--line)}
 .stat{padding:22px 16px 22px 0;min-width:0}
 .stat + .stat{padding-left:18px;border-left:1px solid var(--line)}
-.stat b{display:block;font:400 clamp(2.2rem,4vw,3rem)/1 var(--f-display);letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+.stat b{display:block;font:400 var(--fs-stat)/1 var(--f-display);letter-spacing:-.02em;font-variant-numeric:tabular-nums}
 .stat span{display:block;margin-top:8px;font:600 .78rem/1.4 var(--f-body);letter-spacing:var(--ls-eyebrow);text-transform:uppercase;color:var(--slate)}
 @media (max-width:640px){.stats{grid-template-columns:repeat(2,minmax(0,1fr))}.stat:nth-child(3){padding-left:0;border-left:0}.stat:nth-child(-n+2){border-bottom:1px solid var(--line)}}
 .steps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
 .step{padding-top:16px;border-top:2px solid var(--ink);min-width:0}
 .step i{font:500 .74rem var(--f-mono);color:var(--ember);font-style:normal}
-.step h4{font-size:1.1rem;margin:8px 0 6px}
+.step h4{font-size:clamp(1.6rem,2.4vw,2.125rem);margin:8px 0 8px}
 .step p{font-size:.9rem;color:var(--slate)}
 @media (max-width:640px){.steps{grid-template-columns:1fr}}
 
@@ -415,7 +415,7 @@ select{font:500 .86rem var(--f-body);padding:8px 10px;border-radius:10px;border:
 .house{display:flex;flex-direction:column;gap:8px}
 .house .roof{background:var(--fx-ink);color:var(--fx-white);border-radius:16px;padding:22px 24px}
 .house .roof .eyebrow{color:var(--fx-orange)}
-.house .roof p{font:400 clamp(1.4rem,2.8vw,1.9rem)/1.2 var(--f-display);margin-top:6px;letter-spacing:-.015em}
+.house .roof p:not(.eyebrow){font:400 clamp(1.4rem,2.8vw,1.9rem)/1.2 var(--f-display);margin-top:6px;letter-spacing:-.015em}
 .house .pillars{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
 @media (max-width:1000px){.house .pillars{grid-template-columns:repeat(2,minmax(0,1fr))}}
 .house .pillars div{background:var(--raised);border:1px solid var(--line);border-radius:14px;padding:16px;min-width:0}
@@ -854,25 +854,28 @@ pre.prompt{background:var(--sunk);border:1px solid var(--line);border-radius:16p
         </div>
       </div>
       <div class="block">
-        <div class="bh"><h3>Type scale</h3><p>Measured from www.fastexmedia.com on desktop. The website is the source of truth.</p></div>
+        <div class="bh"><h3>Type scale</h3><p>Measured from www.fastexmedia.com at 1440 px wide, 18 Nov 2026. The website is the source of truth.</p></div>
         <div class="bc">
           <div class="tbl-wrap"><table style="min-width:900px">
             <thead><tr><th>Role</th><th>Font</th><th>Weight</th><th>Size</th><th>Line height</th><th>Tracking</th><th>Case</th><th>Colour</th></tr></thead>
             <tbody>
-            <tr><td><span class="muted small">H1 / Display</span><div style="margin-top:6px"><span style="font:400 2.4rem/1.08 var(--f-display);letter-spacing:-.015em;white-space:nowrap">Your brand.</span></div></td><td>Newsreader</td><td>400</td><td style="white-space:nowrap">76.8 px (4.8rem)</td><td>1.08</td><td>−0.015em</td><td>Sentence</td><td class="mono" style="white-space:nowrap">#0D0D0D</td></tr>
-            <tr><td><span class="muted small">H2 / Section title</span><div style="margin-top:6px"><span style="font:400 1.8rem/1.15 var(--f-display);letter-spacing:-.015em;white-space:nowrap">Map the market</span></div></td><td>Newsreader</td><td>400</td><td style="white-space:nowrap">36.9 px (2.3rem)</td><td>1.15</td><td>−0.015em</td><td>Sentence</td><td class="mono" style="white-space:nowrap">#0D0D0D</td></tr>
-            <tr><td><span class="muted small">H3 / Card title</span><div style="margin-top:6px"><span style="font:400 1.275rem/1.2 var(--f-display);letter-spacing:-.01em;white-space:nowrap">Verified decision-maker data</span></div></td><td>Newsreader</td><td>400</td><td style="white-space:nowrap">20.4 px (1.275rem)</td><td>1.2</td><td>−0.01em</td><td>Sentence</td><td class="mono" style="white-space:nowrap">#0D0D0D</td></tr>
-            <tr><td><span class="muted small">H4 / Small serif label</span><div style="margin-top:6px"><span style="font:400 .93rem/1.2 var(--f-display);letter-spacing:-.01em;text-transform:uppercase;color:var(--slate);white-space:nowrap">Case study</span></div></td><td>Newsreader</td><td>400</td><td style="white-space:nowrap">14.9 px</td><td>1.2</td><td>−0.01em</td><td>UPPERCASE</td><td class="mono" style="white-space:nowrap">#63636B</td></tr>
-            <tr><td><span class="muted small">Eyebrow / Kicker</span><div style="margin-top:6px"><span class="eyebrow">Brand guidelines</span></div></td><td>Inter</td><td>600</td><td style="white-space:nowrap">12.75 px (0.8rem)</td><td>1.5</td><td>0.12em</td><td>UPPERCASE</td><td class="mono" style="white-space:nowrap">#C94A00</td></tr>
-            <tr><td><span class="muted small">Body</span><div style="margin-top:6px"><span style="font:400 1.125rem/1.6 var(--f-body);white-space:nowrap">Every channel reports on one number.</span></div></td><td>Inter</td><td>400</td><td style="white-space:nowrap">18 px (1.125rem)</td><td>1.6</td><td>normal</td><td>Sentence</td><td class="mono" style="white-space:nowrap">#0D0D0D</td></tr>
-            <tr><td><span class="muted small">Body muted / lead</span><div style="margin-top:6px"><span style="font:400 1.17rem/1.6 var(--f-body);color:var(--slate);white-space:nowrap">Qualified meetings, every week.</span></div></td><td>Inter</td><td>400</td><td style="white-space:nowrap">18.7 px</td><td>1.6</td><td>normal</td><td>Sentence</td><td class="mono" style="white-space:nowrap">#63636B</td></tr>
-            <tr><td><span class="muted small">Button</span><div style="margin-top:6px"><span class="btn btn-ink btn-sm">Book a call</span></div></td><td>Inter</td><td>500</td><td style="white-space:nowrap">14.9 px (~0.93rem)</td><td>1.6</td><td>1px</td><td>UPPERCASE</td><td class="mono" style="white-space:nowrap">#FBFAF8 on #0D0D0D</td></tr>
-            <tr><td><span class="muted small">Logo wordmark (nav)</span><div style="margin-top:6px"><span style="font:700 1.2rem/1.2 var(--f-body);letter-spacing:.02em;text-transform:uppercase;white-space:nowrap">Fastex Media</span></div></td><td>Inter</td><td>700</td><td style="white-space:nowrap">~23 px</td><td>1.6</td><td>0.02em</td><td>UPPERCASE</td><td class="mono" style="white-space:nowrap">#0D0D0D</td></tr>
-            <tr><td><span class="muted small">Stat number</span><div style="margin-top:6px"><span style="font:400 2.4rem/1 var(--f-display);letter-spacing:-.02em;white-space:nowrap">3X</span></div></td><td>Newsreader</td><td>400</td><td style="white-space:nowrap">Match H2–H1</td><td>1</td><td>−0.02em</td><td>—</td><td class="mono" style="white-space:nowrap">#0D0D0D</td></tr>
-            <tr><td><span class="muted small">Stat label</span><div style="margin-top:6px"><span style="font:600 .78rem/1.4 var(--f-body);letter-spacing:.12em;text-transform:uppercase;color:var(--slate);white-space:nowrap">Average lead growth</span></div></td><td>Inter</td><td>500–600</td><td style="white-space:nowrap">12–13 px</td><td>1.4</td><td>0.12em</td><td>UPPERCASE</td><td class="mono" style="white-space:nowrap">#63636B</td></tr>
+            <tr><td><span class="muted small">H1 / Display</span><div style="margin-top:6px"><span style="font:400 2.6rem/1.08 var(--f-display);letter-spacing:-.015em;white-space:nowrap">Your brand.</span></div></td><td>Newsreader</td><td>400</td><td style="white-space:nowrap">108 px (7.5vw)</td><td>1.08</td><td>−0.015em</td><td>Sentence</td><td class="mono" style="white-space:nowrap">#0D0D0D</td></tr>
+            <tr><td><span class="muted small">H2 / Statement</span><div style="margin-top:6px"><span style="font:400 2.2rem/1.08 var(--f-display);letter-spacing:-.015em;white-space:nowrap">Design. Scale.</span></div></td><td>Newsreader</td><td>400</td><td style="white-space:nowrap">76.5 px</td><td>1.08</td><td>−0.015em</td><td>Sentence</td><td class="mono" style="white-space:nowrap">#0D0D0D</td></tr>
+            <tr><td><span class="muted small">H2 / Section title</span><div style="margin-top:6px"><span style="font:400 1.9rem/1.08 var(--f-display);letter-spacing:-.015em;white-space:nowrap">Six services.</span></div></td><td>Newsreader</td><td>400</td><td style="white-space:nowrap">51.84 px (3.6vw)</td><td>1.08</td><td>−0.015em</td><td>Sentence</td><td class="mono" style="white-space:nowrap">#0D0D0D</td></tr>
+            <tr><td><span class="muted small">H3 / Step title</span><div style="margin-top:6px"><span style="font:400 1.6rem/1.2 var(--f-display);letter-spacing:-.01em;white-space:nowrap">Map the market</span></div></td><td>Newsreader</td><td>400</td><td style="white-space:nowrap">34 px</td><td>1.2</td><td>−0.01em</td><td>Sentence</td><td class="mono" style="white-space:nowrap">#0D0D0D</td></tr>
+            <tr><td><span class="muted small">H3 / Card title</span><div style="margin-top:6px"><span style="font:400 1.4rem/1.2 var(--f-display);letter-spacing:-.01em;white-space:nowrap">Performance Marketing</span></div></td><td>Newsreader</td><td>400</td><td style="white-space:nowrap">25.5 px</td><td>1.2</td><td>−0.01em</td><td>Sentence</td><td class="mono" style="white-space:nowrap">#0D0D0D</td></tr>
+            <tr><td><span class="muted small">H4 / Small serif label</span><div style="margin-top:6px"><span style="font:400 .93rem/1.2 var(--f-display);letter-spacing:-.01em;text-transform:uppercase;color:var(--slate);white-space:nowrap">Services</span></div></td><td>Newsreader</td><td>400</td><td style="white-space:nowrap">14.9 px</td><td>1.2</td><td>−0.01em</td><td>UPPERCASE</td><td class="mono" style="white-space:nowrap">#63636B</td></tr>
+            <tr><td><span class="muted small">Eyebrow / Kicker</span><div style="margin-top:6px"><span class="eyebrow">Brand guidelines</span></div></td><td>Inter</td><td>400–600</td><td style="white-space:nowrap">12.75 px</td><td>1.5–1.6</td><td>0.12em</td><td>UPPERCASE</td><td class="mono" style="white-space:nowrap">#C94A00</td></tr>
+            <tr><td><span class="muted small">Lead</span><div style="margin-top:6px"><span style="font:400 1.2rem/1.6 var(--f-body);color:var(--slate);white-space:nowrap">You've put a lot into it.</span></div></td><td>Inter</td><td>400</td><td style="white-space:nowrap">21.6 px</td><td>1.6</td><td>normal</td><td>Sentence</td><td class="mono" style="white-space:nowrap">#63636B</td></tr>
+            <tr><td><span class="muted small">Body</span><div style="margin-top:6px"><span style="font:400 1.06rem/1.6 var(--f-body);white-space:nowrap">Every channel reports on one number.</span></div></td><td>Inter</td><td>400</td><td style="white-space:nowrap">17–18 px</td><td>1.6</td><td>normal</td><td>Sentence</td><td class="mono" style="white-space:nowrap">#0D0D0D</td></tr>
+            <tr><td><span class="muted small">Button (primary CTA)</span><div style="margin-top:6px"><span class="btn btn-ink btn-sm">Book a Free Strategy Call</span></div></td><td>Inter</td><td>500</td><td style="white-space:nowrap">14.9 px</td><td>1.6</td><td>1px</td><td>UPPERCASE</td><td class="mono" style="white-space:nowrap">#FBFAF8 on #0D0D0D</td></tr>
+            <tr><td><span class="muted small">Button (nav)</span><div style="margin-top:6px"><span style="display:inline-block;background:var(--ink);color:var(--paper);border-radius:100px;padding:9px 18px;font:500 .95rem/1 var(--f-body);white-space:nowrap">Book a call →</span></div></td><td>Inter</td><td>500</td><td style="white-space:nowrap">15.3 px</td><td>1.6</td><td>normal</td><td>Sentence</td><td class="mono" style="white-space:nowrap">#FBFAF8 on #0D0D0D</td></tr>
+            <tr><td><span class="muted small">Logo wordmark</span><div style="margin-top:6px"><span style="font:700 1.2rem/1.2 var(--f-body);letter-spacing:.02em;text-transform:uppercase;white-space:nowrap">Fastex Media</span></div></td><td>Inter</td><td>700</td><td style="white-space:nowrap">17.9–23.4 px</td><td>1.6</td><td>0.02em</td><td>UPPERCASE</td><td class="mono" style="white-space:nowrap">#0D0D0D</td></tr>
+            <tr><td><span class="muted small">Stat number</span><div style="margin-top:6px"><span style="font:400 2.4rem/1 var(--f-display);letter-spacing:-.02em;white-space:nowrap">20+</span></div></td><td>Newsreader</td><td>400</td><td style="white-space:nowrap">46 px</td><td>1</td><td>−0.02em</td><td>—</td><td class="mono" style="white-space:nowrap">#0D0D0D</td></tr>
+            <tr><td><span class="muted small">Stat label</span><div style="margin-top:6px"><span style="font:600 .78rem/1.4 var(--f-body);letter-spacing:.12em;text-transform:uppercase;color:var(--slate);white-space:nowrap">Brands served</span></div></td><td>Inter</td><td>500–600</td><td style="white-space:nowrap">12–13 px</td><td>1.4</td><td>0.12em</td><td>UPPERCASE</td><td class="mono" style="white-space:nowrap">#63636B</td></tr>
             </tbody>
           </table></div>
-          <p class="note">Headlines scale down on phones with <span class="mono">clamp()</span>: display runs from 44 px to 76.8 px.</p>
+          <p class="note">Headlines scale with the screen width, as on the website: display is 7.5vw (108 px at 1440 px, 44 px minimum on phones) and section titles 3.6vw.</p>
         </div>
       </div>
       <div class="block">
@@ -1182,7 +1185,7 @@ pre.prompt{background:var(--sunk);border:1px solid var(--line);border-radius:16p
       <div class="block">
         <div class="bh"><h3>Changelog</h3><p>What changed in each version of the kit.</p></div>
         <div class="bc files">
-          <div class="file"><div><b>v1.1 · 18 Nov 2026</b><small>Typography aligned with fastexmedia.com: Newsreader + Inter replace Outfit + Inter. Proof point updated to 20+ brands served. Logo size rule for social posts and ads added (cropped mark, 62px on 4:5).</small></div></div>
+          <div class="file"><div><b>v1.1 · 18 Nov 2026</b><small>Type sizes re-measured from fastexmedia.com at 1440 px so the kit renders exactly like the website (display 108 px, section titles 51.84 px, card titles 25.5 px, lead 21.6 px). Typography aligned with fastexmedia.com: Newsreader + Inter replace Outfit + Inter. Proof point updated to 20+ brands served. Logo size rule for social posts and ads added (cropped mark, 62px on 4:5).</small></div></div>
           <div class="file"><div><b>v1.0 · 4 Oct 2026</b><small>First release: foundation, logo, voice and tone, design, marketing, social, ads and downloads.</small></div></div>
         </div>
       </div>
@@ -1385,9 +1388,10 @@ const TOKENS_CSS=`/* Fastex Media brand tokens v1.1 · 18 Nov 2026 */
   --fx-line:rgba(13,13,13,0.12);
 
   /* Type scale */
-  --fs-display:clamp(2.75rem,5vw + 1rem,4.8rem);
-  --fs-h2:clamp(1.75rem,2vw + 1rem,2.3rem);
-  --fs-h3:1.275rem;
+  --fs-display:clamp(2.75rem,7.5vw,6.75rem);   /* 108px at 1440 */
+  --fs-h2:clamp(2rem,3.6vw,3.24rem);          /* 51.84px at 1440 */
+  --fs-h3:1.6rem;                              /* card title 25.5px */
+  --fs-lead:1.35rem;                           /* 21.6px */
   --fs-body:1.125rem;
   --fs-eyebrow:0.8rem;
   --fs-button:0.93rem;
