@@ -22,20 +22,20 @@ def logo(name, w=None, h=None):
     return s.replace("<svg ", f"<svg{attrs} ", 1)
 
 
-FONTS = '<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=Inter:wght@400;500;600&family=DM+Mono:wght@400;500&display=swap">'
+FONTS = '<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300..500;1,6..72,400&family=Inter:wght@400;500;600;700&family=DM+Mono:wght@400;500&display=swap">'
 CSS = """
 body{margin:0;background:#E9E7E3;font-family:Inter,Arial,sans-serif;color:#0D0D0D}
 .page{width:1920px;height:1080px;position:relative;overflow:hidden;background:#FBFAF8;margin:0 auto 40px;box-sizing:border-box;padding:100px 130px}
 .dark{background:#0D0D0D;color:#FFFFFF}
 .orange{background:#FF6600;color:#0D0D0D}
-h1,h2,h3,h4{font-family:Outfit,Arial,sans-serif;font-weight:600;margin:0;letter-spacing:-0.02em}
+h1,h2,h3,h4{font-family:Newsreader,Georgia,serif;font-weight:400;margin:0;letter-spacing:-0.02em}
 h1{font-size:150px;line-height:0.95}
 h2{font-size:76px;line-height:1.02}
 h3{font-size:36px;line-height:1.15}
 h4{font-size:30px;line-height:1.2}
 p{margin:0;font-size:26px;line-height:1.5}
-.eyebrow{font-size:21px;letter-spacing:0.14em;text-transform:uppercase;color:#63636B;font-weight:500}
-.dark .eyebrow{color:#9C9A95}
+.eyebrow{font-size:21px;letter-spacing:0.12em;text-transform:uppercase;color:#C94A00;font-weight:600}
+.dark .eyebrow{color:#FF6600}
 .muted{color:#63636B}
 .dark .muted{color:#B5B3AE}
 .row{display:flex;gap:44px}
@@ -48,7 +48,7 @@ p{margin:0;font-size:26px;line-height:1.5}
 .soft{background:#F3F1ED;border:0}
 .good{background:#E8F4EC;border:0}
 .bad{background:#FBEBEC;border:0}
-.big{font-family:Outfit,Arial,sans-serif;font-weight:600;font-size:116px;line-height:1;letter-spacing:-0.04em}
+.big{font-family:Newsreader,Georgia,serif;font-weight:400;font-size:116px;line-height:1;letter-spacing:-0.04em}
 ul{margin:0;padding-left:32px;font-size:25px;line-height:1.5}
 li{margin-bottom:10px}
 .tag{display:inline-block;font-size:19px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;padding:8px 16px;border-radius:100px}
@@ -59,8 +59,9 @@ table{border-collapse:collapse;width:100%;font-size:23px}
 th,td{text-align:left;padding:16px 18px;border-bottom:2px solid #E6E3DE;vertical-align:top}
 .dark th,.dark td{border-color:#2A2A2E}
 th{font-size:17px;letter-spacing:0.1em;text-transform:uppercase;color:#63636B;font-weight:500}
-.pill{display:inline-block;border-radius:100px;padding:16px 30px;font-weight:600;font-size:24px;border:2px solid #0D0D0D}
+.pill{display:inline-block;border-radius:100px;padding:16px 30px;font-weight:500;font-size:21px;letter-spacing:1px;text-transform:uppercase;border:2px solid #0D0D0D}
 .mono{font-family:'DM Mono',monospace}
+.ul{text-decoration:underline;text-decoration-color:#FF6600;text-decoration-thickness:0.06em;text-underline-offset:0.12em}
 .chev{display:inline-block;width:18px;height:24px;background:#FF6600;clip-path:polygon(0 0,40% 0,100% 50%,40% 100%,0 100%,60% 50%);margin-right:14px}
 """
 
@@ -102,8 +103,8 @@ P = []
 P.append(page("Cover", f"""
   <div class="band" style="left:1180px;opacity:0.9"></div><div class="band" style="left:1420px;opacity:0.25"></div>
   {logo('fx-mark-reversed', 250, 226)}
-  <p class="eyebrow" style="margin-top:140px">Fastex Media · Brand guidelines v1.0 · 4 Oct 2026</p>
-  <h1 style="margin-top:24px">One brand,<br>built to book meetings.</h1>
+  <p class="eyebrow" style="margin-top:140px">Fastex Media · Brand guidelines v1.1 · 18 Nov 2026</p>
+  <h1 style="margin-top:24px">One brand,<br>built to <span class="ul">book meetings</span>.</h1>
   <p class="muted" style="margin-top:34px;max-width:1000px">The logo, the way we sound and the way we market. Use this kit so every post, ad, email and deck looks and reads like Fastex Media.</p>""", cls="dark"))
 
 P.append(page("Contents", """
@@ -123,7 +124,7 @@ P.append(page("At a glance", f"""
   <div class="row" style="margin-top:30px;gap:30px">
     <div class="col box"><div style="width:120px;height:120px;border-radius:60px;background:#FF6600"></div><h3 style="margin-top:30px">Fastex Orange</h3><p class="muted">#FF6600</p></div>
     <div class="col box"><div style="width:120px;height:120px;border-radius:60px;background:#0D0D0D"></div><h3 style="margin-top:30px">Ink</h3><p class="muted">#0D0D0D</p></div>
-    <div class="col box"><div style="height:120px;font:600 96px/120px Outfit,Arial,sans-serif">Aa</div><h3 style="margin-top:30px">Outfit + Inter</h3><p class="muted">Google Fonts</p></div>
+    <div class="col box"><div style="height:120px;font:400 96px/120px Newsreader,Georgia,serif">Aa</div><h3 style="margin-top:30px">Newsreader + Inter</h3><p class="muted">Google Fonts</p></div>
     <div class="col box"><div style="width:34px;height:120px;background:#FF6600;transform:skewX(33.69deg);margin-left:40px"></div><h3 style="margin-top:30px">The 56° cut</h3><p class="muted">One angle everywhere</p></div>
   </div>
   <h3 style="margin-top:70px">The three things that matter most</h3>
@@ -147,7 +148,7 @@ P.append(page("Purpose, promise, personality", """
 
 P.append(page("Proof points", """
   <div class="row" style="margin-top:90px;border-top:2px solid #E6E3DE;border-bottom:2px solid #E6E3DE;padding:50px 0">
-    <div class="col"><div class="big">13+</div><p class="muted">Active client brands</p></div>
+    <div class="col"><div class="big">20+</div><p class="muted">Brands served</p></div>
     <div class="col"><div class="big">3X</div><p class="muted">Average lead growth</p></div>
     <div class="col"><div class="big">60%</div><p class="muted">Average reduction in cost per lead</p></div>
     <div class="col"><div class="big">4.9★</div><p class="muted">Client satisfaction, out of 5</p></div>
@@ -276,7 +277,7 @@ TRAITS = [("Direct", "Lead with the outcome. Give the number, the timeline and t
           ("Industry-fluent", "Use the buyer's own words: EPC, OEM, admissions cycle, channel partners. Show we understand their market before we pitch.", "Admissions teams don't need more enquiries in May. They need them in January."),
           ("Human", "Respect what the client has built. Write like a sharp colleague, in plain English, with short sentences.", "You've put a lot into building your business. Let's help more people discover it.")]
 P.append(page("Five voice traits", table(["Trait", "What it means", "Sounds like"],
-              [(f"<b>{t}</b>", d, f'<span style="font-family:Outfit,Arial,sans-serif">"{q}"</span>') for t, d, q in TRAITS],
+              [(f"<b>{t}</b>", d, f'<span style="font-family:Newsreader,Georgia,serif">"{q}"</span>') for t, d, q in TRAITS],
               "margin-top:30px;font-size:22px"), eyebrow="Brand voice", title="Five voice traits"))
 
 P.append(page("We are / we are not", table(["We are", "We are not", "Why it matters"], [
@@ -308,7 +309,7 @@ def dial(vals):
 
 def tone_card(name, vals, sample, note):
     return (f'<div class="box" style="flex:1;padding:30px"><h4>{name}</h4><div style="margin-top:18px">{dial(vals)}</div>'
-            f'<p style="font-family:Outfit,Arial,sans-serif;font-size:22px;line-height:1.35;border-left:4px solid #FF6600;padding-left:14px;margin-top:10px">"{sample}"</p>'
+            f'<p style="font-family:Newsreader,Georgia,serif;font-size:22px;line-height:1.35;border-left:4px solid #FF6600;padding-left:14px;margin-top:10px">"{sample}"</p>'
             f'<p class="muted" style="font-size:19px;margin-top:12px">{note}</p></div>')
 
 
@@ -358,7 +359,7 @@ P.append(page("Palette", '<div class="row" style="gap:20px;height:640px;margin-t
 
 PAIRS = [("#0D0D0D", "#FBFAF8", "Ink on Paper", "Body text, headlines", "18.6:1", "AAA"),
          ("#FFFFFF", "#0D0D0D", "White on Ink", "Reversed text, dark sections", "19.4:1", "AAA"),
-         ("#0D0D0D", "#FF6600", "Ink on Orange", "Buttons, badges, carousel covers", "6.6:1", "AA"),
+         ("#0D0D0D", "#FF6600", "Ink on Orange", "Badges, labels, carousel covers", "6.6:1", "AA"),
          ("#FF6600", "#0D0D0D", "Orange on Ink", "Stats and highlights on dark", "6.6:1", "AA"),
          ("#63636B", "#FBFAF8", "Slate on Paper", "Captions and secondary text", "5.7:1", "AA"),
          ("#C94A00", "#FBFAF8", "Ember on Paper", "Links and small accent text", "4.5:1", "AA"),
@@ -370,36 +371,34 @@ P.append(page("Proportion and contrast", f"""
     <div style="flex:8;background:#FF6600;padding:18px;font-size:19px">Orange 8%</div><div style="flex:4;background:#63636B;color:#fff;padding:18px;font-size:19px">4%</div></div>
   <p class="muted" style="font-size:21px;margin-top:10px">Orange should cover less than about a tenth of any layout. If everything is orange, nothing stands out.</p>
   <div class="row" style="margin-top:30px;gap:30px;flex-wrap:wrap">""" + "".join(
-    f'<div style="width:390px;display:flex;gap:16px;align-items:center"><div style="width:90px;height:64px;border-radius:12px;background:{bg};color:{fg};border:2px solid #E6E3DE;display:flex;align-items:center;justify-content:center;font:600 28px Outfit,Arial,sans-serif">Aa</div>'
+    f'<div style="width:390px;display:flex;gap:16px;align-items:center"><div style="width:90px;height:64px;border-radius:12px;background:{bg};color:{fg};border:2px solid #E6E3DE;display:flex;align-items:center;justify-content:center;font:400 28px Newsreader,Georgia,serif">Aa</div>'
     f'<div><p style="font-size:21px"><b>{n}</b> · <span class="mono">{r}</span> <span class="tag {"no" if v == "Fail" else "ok"}" style="font-size:14px;padding:4px 10px">{v}</span></p><p class="muted" style="font-size:18px">{u}</p></div></div>'
     for fg, bg, n, u, r, v in PAIRS) + "</div>" +
-    dd("Do", ["Ink text on Fastex Orange for buttons and badges (6.6:1).", "Ember for links and small accent text on light backgrounds."],
+    dd("Do", ["Ink text on Fastex Orange for badges and labels (6.6:1). Primary buttons are ink pills.", "Ember for links and small accent text on light backgrounds."],
        "Don't", ["White text on Fastex Orange (2.9:1 fails).", "Orange body text on paper or white (2.8:1)."], "margin-top:30px"),
     eyebrow="Design · Colour · WCAG 2.1"))
 
 P.append(page("Typefaces", """
-  <div class="row" style="margin-top:10px">
-    <div class="col box"><p class="eyebrow">Display · Outfit</p><div class="big" style="font-size:190px;margin-top:16px">Aa 3X</div><p class="muted" style="font-family:Outfit,Arial,sans-serif;font-size:24px;margin-top:10px">ABCDEFGHIJKLMNOPQRSTUVWXYZ<br>abcdefghijklmnopqrstuvwxyz 0123456789 ₹$%★</p><p class="muted" style="margin-top:16px;font-size:21px">Medium 500, SemiBold 600 (default), Bold 700 for big stats only. Headlines, stats, social buttons and the wordmark.</p></div>
-    <div class="col box"><p class="eyebrow">Body · Inter</p><div style="font-family:Inter,Arial,sans-serif;font-weight:500;font-size:190px;line-height:1;margin-top:16px">Aa</div><p style="font-size:24px;margin-top:10px">We map the market, build the system and scale what converts.</p><p class="muted" style="margin-top:16px;font-size:21px">Regular 400, Medium 500, SemiBold 600. Body copy, UI, captions, emails and decks.</p></div>
-  </div>""", eyebrow="Design · Typography", foot="<span>Both free at fonts.google.com</span>"))
+  <p style="font:400 92px/1.08 Newsreader,Georgia,serif;letter-spacing:-0.015em">Your brand. Your <span class="ul">next chapter</span>.</p>
+  <div class="row" style="margin-top:40px">
+    <div class="col box"><p class="eyebrow">Headlines · Newsreader</p><div class="big" style="font-size:150px;margin-top:12px">Aa 3X</div><p class="muted" style="font-family:Newsreader,Georgia,serif;font-size:24px;margin-top:10px">ABCDEFGHIJKLMNOPQRSTUVWXYZ abcdefghijklmnopqrstuvwxyz 0123456789</p><p class="muted" style="margin-top:12px;font-size:20px">Regular 400, Medium 500 at most. Sentence case.</p></div>
+    <div class="col box"><p class="eyebrow">Body · Inter</p><div style="font-family:Inter,Arial,sans-serif;font-weight:400;font-size:150px;line-height:1;margin-top:12px">Aa</div><p style="font-size:24px;margin-top:10px">We map the market, build the system and scale what converts.</p><p class="muted" style="margin-top:12px;font-size:20px">400 body · 500 buttons · 600 labels · 700 wordmark only.</p></div>
+  </div>""", eyebrow="Design · Typography", foot="<span>Same pair as fastexmedia.com. Both free at fonts.google.com</span>"))
 
-SCALE = [("Display", "64/1.0 · 600 · −3%", "font:600 84px/1 Outfit,Arial,sans-serif;letter-spacing:-0.03em", "Your calendar, full."),
-         ("H1", "48/1.05 · 600 · −2%", "font:600 64px/1.05 Outfit,Arial,sans-serif;letter-spacing:-0.02em", "Three moves. One machine."),
-         ("H2", "32/1.15 · 600 · −1.5%", "font:600 46px/1.15 Outfit,Arial,sans-serif", "Map the market"),
-         ("H3", "22/1.25 · 600", "font:600 34px/1.25 Outfit,Arial,sans-serif", "Verified decision-maker data"),
-         ("Body L", "18/1.6 · 400", "font-size:28px", "We build outbound systems that book qualified B2B meetings."),
-         ("Body", "16/1.6 · 400", "font-size:24px", "Every channel reports on one number: meetings booked."),
-         ("Label", "12/1.2 · 500 · +12% caps", "font-size:20px;letter-spacing:0.12em;text-transform:uppercase;font-weight:500", "Client result · Solar EPC")]
+SCALE = [("H1 / Display", "Newsreader 400 · 76.8 px · 1.08 · −0.015em", "font:400 76px/1.08 Newsreader,Georgia,serif;letter-spacing:-0.015em", "Your brand."),
+         ("H2 / Section", "Newsreader 400 · 36.9 px · 1.15 · −0.015em", "font:400 46px/1.15 Newsreader,Georgia,serif;letter-spacing:-0.015em", "Map the market"),
+         ("H3 / Card", "Newsreader 400 · 20.4 px · 1.2 · −0.01em", "font:400 32px/1.2 Newsreader,Georgia,serif", "Verified decision-maker data"),
+         ("Eyebrow", "Inter 600 · 12.75 px · 0.12em · caps · #C94A00", "font:600 20px Inter,Arial,sans-serif;letter-spacing:0.12em;text-transform:uppercase;color:#C94A00", "Brand guidelines"),
+         ("Body", "Inter 400 · 18 px · 1.6", "font:400 26px/1.6 Inter,Arial,sans-serif", "Every channel reports on one number."),
+         ("Button", "Inter 500 · 14.9 px · 1px · caps", "display:inline-block;font:500 20px Inter,Arial,sans-serif;letter-spacing:1px;text-transform:uppercase;background:#0D0D0D;color:#FBFAF8;border-radius:100px;padding:16px 32px", "Book a call"),
+         ("Stat number / label", "Newsreader 400 · −0.02em / Inter 600 caps 0.12em", "font:400 60px/1 Newsreader,Georgia,serif;letter-spacing:-0.02em", "3X")]
 P.append(page("Type scale", "".join(
-    f'<div style="display:flex;gap:30px;align-items:baseline;padding:12px 0;border-bottom:2px solid #E6E3DE"><div class="mono muted" style="width:300px;font-size:18px">{n}<br>{m}</div><div style="{st}">{t}</div></div>'
-    for n, m, st, t in SCALE), eyebrow="Design · Typography · Web, base 16 px"))
+    f'<div style="display:flex;gap:30px;align-items:center;padding:12px 0;border-bottom:2px solid #E6E3DE"><div class="mono muted" style="width:420px;font-size:17px">{n}<br>{m}</div><div style="{st}">{t}</div></div>'
+    for n, m, st, t in SCALE), eyebrow="Design · Typography · measured from fastexmedia.com"))
 
-P.append(page("Type rules", """
-  <div class="row" style="margin-top:60px">
-    <div class="col box"><h3>Tight on top, open below</h3><p class="muted" style="margin-top:14px">Track headlines −1.5% to −3% and set body text at 1.6 line height. Keep body lines to about 65 characters.</p></div>
-    <div class="col box"><h3>Stats are the hero</h3><p class="muted" style="margin-top:14px">Set numbers in Outfit SemiBold or Bold, tabular, large and in orange on Ink. Put the label underneath in Inter.</p></div>
-    <div class="col box"><h3>Fallbacks</h3><p class="muted" style="margin-top:14px">If Outfit and Inter can't load (Word, Gmail, PowerPoint), use Arial. Never use Times or Comic Sans, and never mix in a third typeface.</p></div>
-  </div>""", eyebrow="Design · Typography", title="Rules"))
+P.append(page("Type rules", dd("Do", ["Serif headlines in Newsreader, regular weight, sentence case.", "A thin orange underline on 1 to 3 key words.", "Inter uppercase only for eyebrows, labels, buttons and the wordmark.", "Fallbacks: Georgia for headlines, Arial for body."],
+                               "Don't", ["Heavy or black headline weights. Never above 500.", "All-caps headlines.", "Orange-filled headline words.", "Outfit (retired 18 Nov 2026)."], "margin-top:30px"),
+              eyebrow="Design · Typography", title="Rules"))
 
 P.append(page("The 56° cut", """
   <div class="row" style="align-items:center;margin-top:20px">
@@ -413,7 +412,7 @@ icons = "".join(f'<svg viewBox="0 0 24 24" width="64" height="64" fill="none" st
 P.append(page("Elements", f"""
   <div class="row" style="margin-top:30px">
     <div class="col box"><h3>Chevron marker</h3><p class="muted" style="margin-top:10px">Use the chevron in place of bullets and arrows. Always point it forward.</p><p style="margin-top:24px"><span class="chev"></span>Map the market<br><span class="chev"></span>Build the system<br><span class="chev"></span>Scale what converts</p></div>
-    <div class="col box"><h3>Buttons</h3><p class="muted" style="margin-top:10px">Pill shape, fully rounded. One primary button per screen.</p><div style="margin-top:24px;display:flex;flex-direction:column;gap:14px;align-items:flex-start"><span class="pill" style="background:#FF6600;border-color:#FF6600">Book a Free Strategy Call</span><span class="pill" style="background:#0D0D0D;color:#fff">See case studies</span><span class="pill">View service →</span></div></div>
+    <div class="col box"><h3>Buttons</h3><p class="muted" style="margin-top:10px">Pill shape, fully rounded. One primary button per screen.</p><div style="margin-top:24px;display:flex;flex-direction:column;gap:14px;align-items:flex-start"><span class="pill" style="background:#0D0D0D;color:#FBFAF8">Book a Free Strategy Call</span><span class="pill">See case studies</span><span class="pill">View service →</span></div></div>
     <div class="col box"><h3>Icons</h3><p class="muted" style="margin-top:10px">2 px line icons on a 24 px grid, rounded caps, in Ink. Ember for at most one icon per set.</p><div style="margin-top:30px">{icons}</div></div>
   </div>""", eyebrow="Design · Graphic language", title="Elements"))
 
@@ -439,7 +438,7 @@ P.append(page("Messaging house", """
     <div class="col box"><h4>Measured on meetings</h4><p class="muted" style="font-size:22px;margin-top:8px">One number in every report: qualified meetings booked.</p></div>
     <div class="col box"><h4>Industry depth</h4><p class="muted" style="font-size:22px;margin-top:8px">Five sectors we know well. We already know who signs.</p></div>
   </div>
-  <div style="background:#FFF1E7;border-radius:20px;padding:22px 30px;margin-top:20px"><p><b>Proof:</b> 13+ active brands · 3X average lead growth · 60% average CPL reduction · 4.9★ client satisfaction</p></div>""",
+  <div style="background:#FFF1E7;border-radius:20px;padding:22px 30px;margin-top:20px"><p><b>Proof:</b> 20+ brands served · 3X average lead growth · 60% average CPL reduction · 4.9★ client satisfaction</p></div>""",
                 eyebrow="Marketing · Strategy", title="Messaging house"))
 
 P.append(page("Industry messaging", table(["Industry", "Who signs", "Their pain", "Our message", "Lead channel"], [
@@ -481,10 +480,10 @@ P.append(page("Case study format", """
 # social
 P.append(page("Social: post templates", """
   <div class="row" style="margin-top:20px;gap:30px;align-items:flex-start">
-    <div style="width:380px"><div style="width:380px;height:380px;background:#0D0D0D;color:#fff;border-radius:16px;padding:34px;box-sizing:border-box;position:relative"><p style="font-size:14px;letter-spacing:.12em;color:#A9A7A2">CLIENT RESULT · AVERAGE</p><div class="big" style="font-size:144px;color:#FF6600;margin-top:30px">60%</div><p style="font-family:Outfit,Arial,sans-serif;font-size:26px;font-weight:500;margin-top:8px">lower cost per lead across client accounts</p></div><h4 style="font-size:24px;margin-top:14px">Stat post · 1:1</h4><p class="muted" style="font-size:19px">One number, one line, Ink background. For proof.</p></div>
-    <div style="width:330px"><div style="width:330px;height:412px;background:#FBFAF8;border:2px solid #E6E3DE;border-radius:16px;padding:32px;box-sizing:border-box"><div style="width:30px;height:42px;background:#FF6600;clip-path:polygon(0 0,40% 0,100% 50%,40% 100%,0 100%,60% 50%)"></div><p style="font-family:Outfit,Arial,sans-serif;font-size:29px;font-weight:500;line-height:1.15;margin-top:26px">"Fastex Media built a lead system that fills our sales calendar every week."</p><p class="muted" style="font-size:15px;margin-top:24px">Fastex Media client · B2B services</p></div><h4 style="font-size:24px;margin-top:14px">Testimonial · 4:5</h4><p class="muted" style="font-size:19px">Real quotes only, approved in writing.</p></div>
-    <div style="width:330px"><div style="width:330px;height:412px;background:#FF6600;border-radius:16px;padding:32px;box-sizing:border-box"><p class="mono" style="font-size:15px">01 / 07</p><p style="font-family:Outfit,Arial,sans-serif;font-size:46px;font-weight:600;line-height:0.95;margin-top:80px">Three moves. One machine.</p><p style="font-size:16px;margin-top:20px">How we book qualified B2B meetings, step by step.</p></div><h4 style="font-size:24px;margin-top:14px">Carousel cover · 4:5</h4><p class="muted" style="font-size:19px">Orange cover, black one-colour mark. Ink inside, 5–9 slides.</p></div>
-    <div style="width:232px"><div style="width:232px;height:412px;background:#0D0D0D;color:#fff;border-radius:16px;padding:26px;box-sizing:border-box;position:relative;overflow:hidden"><div style="position:absolute;top:-20px;bottom:-20px;right:-14px;width:70px;background:#FF6600;transform:skewX(33.69deg)"></div><p style="position:relative;font-family:Outfit,Arial,sans-serif;font-size:30px;font-weight:600;line-height:1;margin-top:150px;max-width:150px">Your sales calendar, full.</p><p style="position:absolute;left:20px;right:20px;bottom:30px;background:#fff;color:#0D0D0D;border-radius:100px;padding:10px;text-align:center;font-size:13px;font-weight:600">Book a free strategy call</p></div><h4 style="font-size:24px;margin-top:14px">Story · 9:16</h4><p class="muted" style="font-size:19px">Keep top and bottom 14% clear.</p></div>
+    <div style="width:380px"><div style="width:380px;height:380px;background:#0D0D0D;color:#fff;border-radius:16px;padding:34px;box-sizing:border-box;position:relative"><p style="font-size:14px;letter-spacing:.12em;color:#A9A7A2">CLIENT RESULT · AVERAGE</p><div class="big" style="font-size:144px;color:#fff;margin-top:30px"><span class="ul">60%</span></div><p style="font-family:Newsreader,Georgia,serif;font-size:26px;font-weight:400;margin-top:8px">lower cost per lead across client accounts</p></div><h4 style="font-size:24px;margin-top:14px">Stat post · 1:1</h4><p class="muted" style="font-size:19px">One number, one line, Ink background. For proof.</p></div>
+    <div style="width:330px"><div style="width:330px;height:412px;background:#FBFAF8;border:2px solid #E6E3DE;border-radius:16px;padding:32px;box-sizing:border-box"><div style="width:30px;height:42px;background:#FF6600;clip-path:polygon(0 0,40% 0,100% 50%,40% 100%,0 100%,60% 50%)"></div><p style="font-family:Newsreader,Georgia,serif;font-size:29px;font-weight:400;line-height:1.15;margin-top:26px">"Fastex Media built a lead system that fills our sales calendar every week."</p><p class="muted" style="font-size:15px;margin-top:24px">Fastex Media client · B2B services</p></div><h4 style="font-size:24px;margin-top:14px">Testimonial · 4:5</h4><p class="muted" style="font-size:19px">Real quotes only, approved in writing.</p></div>
+    <div style="width:330px"><div style="width:330px;height:412px;background:#FF6600;border-radius:16px;padding:32px;box-sizing:border-box"><p class="mono" style="font-size:15px">01 / 07</p><p style="font-family:Newsreader,Georgia,serif;font-size:46px;font-weight:400;line-height:0.95;margin-top:80px">Three moves. One machine.</p><p style="font-size:16px;margin-top:20px">How we book qualified B2B meetings, step by step.</p></div><h4 style="font-size:24px;margin-top:14px">Carousel cover · 4:5</h4><p class="muted" style="font-size:19px">Orange cover, black one-colour mark. Ink inside, 5–9 slides.</p></div>
+    <div style="width:232px"><div style="width:232px;height:412px;background:#0D0D0D;color:#fff;border-radius:16px;padding:26px;box-sizing:border-box;position:relative;overflow:hidden"><div style="position:absolute;top:-20px;bottom:-20px;right:-14px;width:70px;background:#FF6600;transform:skewX(33.69deg)"></div><p style="position:relative;font-family:Newsreader,Georgia,serif;font-size:30px;font-weight:400;line-height:1;margin-top:150px;max-width:150px">Your sales calendar, full.</p><p style="position:absolute;left:20px;right:20px;bottom:30px;background:#fff;color:#0D0D0D;border-radius:100px;padding:10px;text-align:center;font-size:13px;font-weight:600">Book a free strategy call</p></div><h4 style="font-size:24px;margin-top:14px">Story · 9:16</h4><p class="muted" style="font-size:19px">Keep top and bottom 14% clear.</p></div>
   </div>""", eyebrow="Marketing · Social media", foot="<span>Editable full-size versions of each template are in the Canva folder.</span>"))
 
 P.append(page("Social: platform specs", table(["Platform", "Role", "Feed sizes", "Other sizes", "Cadence"], [
@@ -517,14 +516,14 @@ P.append(page("Ads: principles", """
   <div class="row" style="margin-top:60px">
     <div class="col box"><h3>One message</h3><p class="muted" style="margin-top:14px">Each ad makes one promise. If you need "and", make it two ads.</p></div>
     <div class="col box"><h3>Proof in the frame</h3><p class="muted" style="margin-top:14px">A number, an industry or a method should be visible without reading the caption.</p></div>
-    <div class="col box"><h3>Brand in the first second</h3><p class="muted" style="margin-top:14px">Ink + orange + Outfit, mark in a corner. For video, show the mark within 2 seconds and at the end.</p></div>
+    <div class="col box"><h3>Brand in the first second</h3><p class="muted" style="margin-top:14px">Ink + orange + Newsreader, lockup top-left at the social and ads size. For video, show the mark within 2 seconds and at the end.</p></div>
   </div>""", eyebrow="Marketing · Ads", title="Ads get one glance"))
 
 P.append(page("Ads: mock-ups", f"""
   <div class="row" style="gap:36px;margin-top:10px;align-items:flex-start">
     <div style="width:820px" class="box" ><div style="display:flex;gap:14px;align-items:center">{logo('fx-avatar-dark', 56, 56)}<p style="font-size:21px"><b>Fastex Media</b><br><span class="muted" style="font-size:17px">Promoted</span></p></div>
       <p style="font-size:21px;margin-top:14px">Your SDRs shouldn't spend Monday building lists. We research decision-makers, run the outreach and put qualified meetings on your calendar.</p>
-      <div style="margin-top:16px;height:390px;background:#0D0D0D;color:#fff;border-radius:12px;padding:44px;box-sizing:border-box;position:relative;overflow:hidden"><div style="position:absolute;top:-40px;bottom:-40px;right:150px;width:70px;background:#FF6600;transform:skewX(33.69deg)"></div><p style="position:relative;font-family:Outfit,Arial,sans-serif;font-size:62px;font-weight:600;line-height:1;max-width:460px">Your sales calendar, <span style="color:#FF6600">full.</span></p><p style="position:relative;color:#B5B3AE;font-size:20px;margin-top:20px">Qualified B2B meetings · every week</p></div>
+      <div style="margin-top:16px;height:390px;background:#0D0D0D;color:#fff;border-radius:12px;padding:44px;box-sizing:border-box;position:relative;overflow:hidden"><div style="position:absolute;top:-40px;bottom:-40px;right:150px;width:70px;background:#FF6600;transform:skewX(33.69deg)"></div><p style="position:relative;font-family:Newsreader,Georgia,serif;font-size:62px;font-weight:400;line-height:1;max-width:460px">Your sales calendar, <span class="ul">full</span>.</p><p style="position:relative;color:#B5B3AE;font-size:20px;margin-top:20px">Qualified B2B meetings · every week</p></div>
       <div style="display:flex;justify-content:space-between;align-items:center;margin-top:16px"><p style="font-size:21px"><b>Book a free strategy call</b><br><span class="muted" style="font-size:17px">fastexmedia.com</span></p><span class="pill" style="border-color:#C94A00;color:#C94A00;font-size:19px;padding:10px 22px">Learn more</span></div></div>
     <div class="col">
       <div class="box" style="font-family:Arial,sans-serif"><p style="font-size:18px;font-weight:700">Sponsored</p><p class="muted" style="font-size:18px;margin-top:6px">Fastex Media · fastexmedia.com/b2b-lead-generation</p><p style="color:#1A0DAB;font-size:28px;line-height:1.3;margin-top:10px">B2B Lead Generation Agency | Qualified Meetings Booked | Free Strategy Call</p><p class="muted" style="font-size:20px;margin-top:8px">Multi-channel outbound across LinkedIn, email and WhatsApp. Verified decision-maker data. Reported on meetings booked.</p></div>
@@ -543,7 +542,7 @@ P.append(page("Ads: specs and limits", table(["Platform", "Format", "Image / vid
 
 P.append(page("Ads: CTA library and claims", """
   <h3>CTA library</h3>
-  <div style="display:flex;flex-wrap:wrap;gap:14px;margin-top:18px"><span class="pill" style="background:#FF6600;border-color:#FF6600">Book a Free Strategy Call</span><span class="pill">See case studies</span><span class="pill">Get the playbook</span><span class="pill">Map my market</span><span class="pill">Talk to us on WhatsApp</span><span class="pill">View service →</span></div>
+  <div style="display:flex;flex-wrap:wrap;gap:14px;margin-top:18px"><span class="pill" style="background:#0D0D0D;color:#FBFAF8">Book a Free Strategy Call</span><span class="pill">See case studies</span><span class="pill">Get the playbook</span><span class="pill">Map my market</span><span class="pill">Talk to us on WhatsApp</span><span class="pill">View service →</span></div>
   <h3 style="margin-top:44px">Claims and compliance</h3>""" +
     dd("Do", ['Call every figure an average and say what of: "3X average lead growth across client accounts".', "Keep a source sheet for every number used in an ad.", "Get written approval before naming a client or using their logo.", "Only click-to-WhatsApp ads with opted-in contacts."],
        "Don't", ['"Guaranteed leads", "guaranteed ROI" or a fixed meeting count without contract terms.', "Competitor names or trademarks without legal review.", 'Fake urgency: "only 2 spots left" unless true.', "More than about 20% text on paid images."], "margin-top:18px"),
@@ -552,7 +551,7 @@ P.append(page("Ads: CTA library and claims", """
 P.append(page("Before you publish", """
   <div class="row" style="margin-top:30px">
     <ul class="col" style="font-size:30px;list-style:none;padding:0"><li>☐ Does it make one clear promise?</li><li>☐ Is every number sourced and described as an average?</li><li>☐ Does it use the official logo file, with clear space?</li><li>☐ Is orange under 10%, with no white-on-orange text?</li></ul>
-    <ul class="col" style="font-size:30px;list-style:none;padding:0"><li>☐ Is it set in Outfit and Inter only?</li><li>☐ Is it free of the avoid list ("guaranteed", "viral", "!!!")?</li><li>☐ Is client approval in writing, if a client is named?</li><li>☐ Is there one CTA from the CTA library?</li></ul>
+    <ul class="col" style="font-size:30px;list-style:none;padding:0"><li>☐ Is it set in Newsreader and Inter only?</li><li>☐ Is it free of the avoid list ("guaranteed", "viral", "!!!")?</li><li>☐ Is client approval in writing, if a client is named?</li><li>☐ Is there one CTA from the CTA library?</li></ul>
   </div>""", cls="orange", eyebrow="Marketing · Checklist", title="Before you publish"))
 
 # ------------------------------------------------------------------ 6 resources
@@ -595,62 +594,70 @@ def tpl(fname, title, w, h, inner, bg):
     (T / fname).write_text(
         f'<!doctype html><html><head><meta charset="utf-8"><title>{title}</title>{FONTS}<style>body{{margin:0;font-family:Inter,Arial,sans-serif}}'
         f'h1,h2,p{{margin:0}}.page{{width:{w}px;height:{h}px;position:relative;overflow:hidden;background:{bg};box-sizing:border-box}}'
-        f'.band{{position:absolute;background:#FF6600;transform:skewX(33.69deg)}}</style></head><body>{inner}</body></html>')
+        f'.band{{position:absolute;background:#FF6600;transform:skewX(33.69deg)}}'
+        f'.ul{{text-decoration:underline;text-decoration-color:#FF6600;text-decoration-thickness:0.06em;text-underline-offset:0.12em}}</style></head><body>{inner}</body></html>')
 
 
 def pg(inner, label="Page"):
     return f'<section class="page" data-document-role="page" data-label="{label}">{inner}</section>'
 
 
+def lockup(mark, color, mark_h, top=64, left=96, scale=1.0):
+    """Social/ads lockup: cropped mark + FASTEX MEDIA in Inter 700, 32 px on a 1080-wide canvas, 20 px gap."""
+    mw = round(mark_h * 338 / 306)
+    return (f'<div style="position:absolute;left:{left}px;top:{top}px;display:flex;align-items:center;gap:{round(20 * scale)}px">'
+            f'{logo(mark, mw, mark_h)}<span style="font:700 {round(32 * scale)}px/1 Inter,Arial,sans-serif;letter-spacing:0.025em;'
+            f'text-transform:uppercase;color:{color};white-space:nowrap">Fastex Media</span></div>')
+
+
 tpl("stat-post-1080.html", "Fastex - Stat post 1080x1080", 1080, 1080, pg(f"""
-<div style="padding:97px">
-<p style="font:500 38px Inter,Arial,sans-serif;letter-spacing:.12em;text-transform:uppercase;color:#A9A7A2">Client result · average</p>
-<p style="font:600 400px/0.85 Outfit,Arial,sans-serif;letter-spacing:-0.05em;color:#FF6600;margin-top:100px">60%</p>
-<p style="font:500 74px/1.15 Outfit,Arial,sans-serif;color:#fff;margin-top:40px;max-width:760px">lower cost per lead across client accounts</p></div>
-<div style="position:absolute;left:97px;bottom:86px">{logo('fx-mark-reversed', 140, 127)}</div>
-<p style="position:absolute;right:97px;bottom:100px;font:500 36px Inter,Arial,sans-serif;color:#A9A7A2">fastexmedia.com</p>""", "Stat post"), "#0D0D0D")
+{lockup('FX-mark-cropped-for-dark-bg', '#FFFFFF', 60)}
+<div style="padding:210px 96px 96px">
+<p style="font:600 30px Inter,Arial,sans-serif;letter-spacing:.12em;text-transform:uppercase;color:#FF6600">Client result · average</p>
+<p style="font:400 360px/0.9 Newsreader,Georgia,serif;letter-spacing:-0.02em;color:#FFFFFF;margin-top:40px"><span class="ul">60%</span></p>
+<p style="font:400 70px/1.15 Newsreader,Georgia,serif;letter-spacing:-0.015em;color:#fff;margin-top:36px;max-width:760px">lower cost per lead across client accounts</p></div>
+<p style="position:absolute;right:96px;bottom:96px;font:500 30px Inter,Arial,sans-serif;color:#A9A7A2">fastexmedia.com</p>""", "Stat post"), "#0D0D0D")
 
 tpl("testimonial-1080x1350.html", "Fastex - Testimonial 1080x1350", 1080, 1350, pg(f"""
-<div style="padding:108px 97px">
-<div style="width:97px;height:140px;background:#FF6600;clip-path:polygon(0 0,40% 0,100% 50%,40% 100%,0 100%,60% 50%)"></div>
-<p style="font:500 92px/1.14 Outfit,Arial,sans-serif;letter-spacing:-0.02em;color:#0D0D0D;margin-top:86px">"Fastex Media built a lead system that fills our sales calendar every week."</p>
-<p style="font:500 38px Inter,Arial,sans-serif;color:#63636B;margin-top:76px">Fastex Media client · B2B services</p></div>
-<div style="position:absolute;left:97px;bottom:113px;width:324px;height:9px;background:#0D0D0D"></div>
-<div style="position:absolute;right:97px;bottom:97px">{logo('fx-mark-primary', 119, 108)}</div>""", "Testimonial"), "#FBFAF8")
+{lockup('FX-mark-cropped-for-light-bg', '#0D0D0D', 62)}
+<div style="padding:250px 96px 108px">
+<div style="width:70px;height:100px;background:#FF6600;clip-path:polygon(0 0,40% 0,100% 50%,40% 100%,0 100%,60% 50%)"></div>
+<p style="font:400 92px/1.14 Newsreader,Georgia,serif;letter-spacing:-0.015em;color:#0D0D0D;margin-top:70px">"Fastex Media built a lead system that <span class="ul">fills our sales calendar</span> every week."</p>
+<p style="font:600 30px Inter,Arial,sans-serif;letter-spacing:.12em;text-transform:uppercase;color:#63636B;margin-top:70px">Fastex Media client · B2B services</p></div>""", "Testimonial"), "#FBFAF8")
 
-car_inner = f"""<div style="padding:108px 97px;color:#fff"><p style="font:500 38px 'DM Mono',monospace;color:#FF6600">02 / 07</p>
-<p style="font:600 110px/1 Outfit,Arial,sans-serif;letter-spacing:-0.035em;margin-top:200px">Map the market</p>
-<p style="font:400 44px/1.45 Inter,Arial,sans-serif;color:#C9C7C2;margin-top:50px;max-width:820px">Define the accounts worth winning and build a verified dataset of the decision-makers inside them.</p></div>
-<div style="position:absolute;left:97px;bottom:86px">{logo('fx-mark-reversed', 119, 108)}</div>"""
+car_inner = f"""{lockup('FX-mark-cropped-for-dark-bg', '#FFFFFF', 62)}
+<div style="padding:250px 96px 108px;color:#fff"><p style="font:600 30px Inter,Arial,sans-serif;letter-spacing:.12em;color:#FF6600">02 / 07</p>
+<p style="font:400 120px/1.05 Newsreader,Georgia,serif;letter-spacing:-0.015em;margin-top:160px">Map the market</p>
+<p style="font:400 44px/1.45 Inter,Arial,sans-serif;color:#C9C7C2;margin-top:50px;max-width:820px">Define the accounts worth winning and build a verified dataset of the decision-makers inside them.</p></div>"""
 tpl("carousel-1080x1350.html", "Fastex - LinkedIn carousel 1080x1350", 1080, 1350, pg(f"""
-<div style="padding:108px 97px;color:#0D0D0D"><p style="font:500 38px 'DM Mono',monospace">01 / 07</p>
-<p style="font:600 146px/0.95 Outfit,Arial,sans-serif;letter-spacing:-0.04em;margin-top:238px">Three moves. One machine.</p>
-<p style="font:500 48px/1.35 Inter,Arial,sans-serif;margin-top:65px;max-width:880px">How we book qualified B2B meetings, step by step.</p></div>
-<div style="position:absolute;left:97px;bottom:86px">{logo('fx-mark-black', 119, 108)}</div>
-<p style="position:absolute;right:97px;bottom:97px;font:600 43px Inter,Arial,sans-serif;color:#0D0D0D">Swipe →</p>""", "Cover").replace('class="page"', 'class="page" style="background:#FF6600"') +
+{lockup('fx-mark-black', '#0D0D0D', 62)}
+<div style="padding:250px 96px 108px;color:#0D0D0D"><p style="font:600 30px Inter,Arial,sans-serif;letter-spacing:.12em">01 / 07</p>
+<p style="font:400 150px/1 Newsreader,Georgia,serif;letter-spacing:-0.015em;margin-top:180px">Three moves. One machine.</p>
+<p style="font:400 46px/1.4 Inter,Arial,sans-serif;margin-top:60px;max-width:880px">How we book qualified B2B meetings, step by step.</p></div>
+<p style="position:absolute;right:96px;bottom:96px;font:500 32px Inter,Arial,sans-serif;letter-spacing:1px;text-transform:uppercase;color:#0D0D0D">Swipe →</p>""", "Cover").replace('class="page"', 'class="page" style="background:#FF6600"') +
     pg(car_inner, "Inside page").replace('class="page"', 'class="page" style="background:#0D0D0D"'), "#FF6600")
 
 tpl("story-1080x1920.html", "Fastex - Story 1080x1920", 1080, 1920, pg(f"""
 <div class="band" style="top:-100px;bottom:-100px;right:-65px;width:324px"></div>
-<div style="position:absolute;left:97px;top:130px">{logo('fx-mark-reversed', 162, 147)}</div>
-<p style="position:absolute;left:97px;right:324px;top:845px;font:600 130px/1 Outfit,Arial,sans-serif;letter-spacing:-0.035em;color:#fff">Your sales calendar, full.</p>
-<p style="position:absolute;left:97px;right:97px;bottom:151px;background:#fff;color:#0D0D0D;border-radius:100px;padding:54px;text-align:center;font:600 54px Inter,Arial,sans-serif">Book a free strategy call</p>""", "Story"), "#0D0D0D")
+{lockup('FX-mark-cropped-for-dark-bg', '#FFFFFF', 72, top=260)}
+<p style="position:absolute;left:96px;right:324px;top:845px;font:400 132px/1.05 Newsreader,Georgia,serif;letter-spacing:-0.015em;color:#fff">Your sales calendar, <span class="ul">full</span>.</p>
+<p style="position:absolute;left:96px;right:96px;bottom:151px;background:#FBFAF8;color:#0D0D0D;border-radius:100px;padding:54px;text-align:center;font:500 44px Inter,Arial,sans-serif;letter-spacing:1px;text-transform:uppercase">Book a free strategy call</p>""", "Story"), "#0D0D0D")
 
 tpl("linkedin-ad-1200x627.html", "Fastex - LinkedIn ad 1200x627", 1200, 627, pg(f"""
 <div class="band" style="top:-60px;bottom:-60px;right:168px;width:108px"></div>
-<div style="padding:84px 72px;position:relative"><p style="font:600 96px/1 Outfit,Arial,sans-serif;letter-spacing:-0.03em;color:#fff;max-width:680px">Your sales calendar, <span style="color:#FF6600">full.</span></p>
-<p style="font:500 32px Inter,Arial,sans-serif;color:#B5B3AE;margin-top:40px">Qualified B2B meetings · every week</p></div>
-<div style="position:absolute;right:54px;bottom:60px">{logo('fx-mark-reversed', 84, 76)}</div>""", "LinkedIn ad"), "#0D0D0D")
+{lockup('FX-mark-cropped-for-dark-bg', '#FFFFFF', 68, top=64, left=96, scale=1200 / 1080)}
+<div style="padding:200px 96px 60px;position:relative"><p style="font:400 92px/1.05 Newsreader,Georgia,serif;letter-spacing:-0.015em;color:#fff;max-width:680px">Your sales calendar, <span class="ul">full</span>.</p>
+<p style="font:600 26px Inter,Arial,sans-serif;letter-spacing:.12em;text-transform:uppercase;color:#B5B3AE;margin-top:36px">Qualified B2B meetings · every week</p></div>""", "LinkedIn ad"), "#0D0D0D")
 
 tpl("linkedin-banner-1128x191.html", "Fastex - LinkedIn banner 1128x191", 1128, 191, pg(f"""
 <div class="band" style="top:-30px;bottom:-30px;left:700px;width:46px"></div><div class="band" style="top:-30px;bottom:-30px;left:780px;width:46px;opacity:.35"></div>
-<p style="position:absolute;left:300px;top:48px;font:600 44px/1 Outfit,Arial,sans-serif;letter-spacing:-0.02em;color:#fff">Qualified B2B meetings. Every week.</p>
-<p style="position:absolute;left:300px;top:110px;font:500 20px Inter,Arial,sans-serif;color:#B5B3AE">LinkedIn · Cold email · WhatsApp · Performance marketing</p>
+<p style="position:absolute;left:300px;top:48px;font:400 44px/1 Newsreader,Georgia,serif;letter-spacing:-0.02em;color:#fff">Qualified B2B meetings. Every week.</p>
+<p style="position:absolute;left:300px;top:110px;font:600 16px Inter,Arial,sans-serif;letter-spacing:.12em;text-transform:uppercase;color:#B5B3AE">LinkedIn · Cold email · WhatsApp · Performance marketing</p>
 <p style="position:absolute;right:40px;bottom:30px;font:500 18px Inter,Arial,sans-serif;color:#FF6600">fastexmedia.com</p>""", "Banner"), "#0D0D0D")
 
 tpl("x-header-1500x500.html", "Fastex - X header 1500x500", 1500, 500, pg(f"""
 <div class="band" style="top:-80px;bottom:-80px;left:1000px;width:110px"></div><div class="band" style="top:-80px;bottom:-80px;left:1170px;width:110px;opacity:.3"></div>
 <div style="position:absolute;left:90px;top:120px">{logo('fx-lockup-horizontal-reversed', 600, 105)}</div>
-<p style="position:absolute;left:90px;top:290px;font:500 40px Outfit,Arial,sans-serif;color:#fff">Engineered for B2B scale.</p>""", "X header"), "#0D0D0D")
+<p style="position:absolute;left:90px;top:290px;font:400 40px Newsreader,Georgia,serif;color:#fff">Engineered for B2B scale.</p>""", "X header"), "#0D0D0D")
 
 print("templates:", len(list(T.glob("*.html"))))

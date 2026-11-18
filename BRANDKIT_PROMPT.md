@@ -14,9 +14,9 @@ Read the website and pull out only real facts. Do not invent claims.
 - Services: Performance Marketing, LinkedIn Lead Generation, Social Media Marketing, WhatsApp Marketing, Cold Email Marketing, Lead Research, Appointment Setting.
 - Industries: IT & Software, Solar & Renewable Energy, Manufacturing, Educational Institutes, Real Estate.
 - Method: "Three moves. One machine." Map the market → Build the system → Scale what converts.
-- Proof points: 13+ active brands, 3X average lead growth, 60% average CPL reduction, 4.9★ client satisfaction.
+- Proof points: 20+ brands served, 3X average lead growth, 60% average CPL reduction, 4.9★ client satisfaction.
 - Lines already in use: "Your brand. Your next chapter.", "Engineered for B2B scale.", "Book a Free Strategy Call".
-- Website design tokens: headings in **Outfit**, body in **Inter**, Fastex Orange `#FF6600`, Ember `#C94A00`, Ink `#0D0D0D`, Paper `#FBFAF8`, Slate `#63636B`, pill-shaped buttons.
+- Website design tokens: headlines in **Newsreader** (regular 400, sentence case, orange underline on 1–3 key words), body, labels and buttons in **Inter**, Fastex Orange `#FF6600`, Ember `#C94A00`, Ink `#0D0D0D`, Paper `#FBFAF8`, Slate `#63636B`, ink pill buttons with uppercase Inter labels.
 - Contact: hello@fastexmedia.com · +91 93286 80929 · LinkedIn /company/fastex-media-agency · Instagram @fastexmedia_
 
 ### 2. Study the logo
@@ -33,9 +33,9 @@ All diagonals run at the same angle (2 units across for every 3 down, about 56°
 3. **Brand tone**: how the voice changes by context (website, LinkedIn, cold email, WhatsApp, ads, sales calls, client reporting, problems). Show this with tone sliders and a sample line for each context.
 4. **Logo guidelines**: every variant (primary, reversed, one-colour black and white, dark badge, light tile, horizontal and stacked lockups), anatomy, clear space, minimum size, approved backgrounds and misuse examples.
 5. **Colour**: swatches with HEX, RGB and CMYK and a copy button for each; a usage ratio; measured WCAG contrast pairs with clear pass/fail rules.
-6. **Typography**: typefaces, type scale, pairing rules, number styling.
+6. **Typography**: typefaces, type scale measured from the website, pairing rules, number styling. No headline weight above 500 and no all-caps headlines.
 7. **Graphic language**: the 56° diagonal, chevron motif, grid, imagery, icons, buttons.
-8. **Social media guidelines**: platform-by-platform specs (LinkedIn, Instagram, X, WhatsApp), live HTML mock-ups of post templates, content pillars and mix, caption formula, hashtag rules, posting cadence.
+8. **Social media guidelines**: the logo-on-social rule (cropped mark, 62 px tall on 1080 × 1350, top-left), platform-by-platform specs (LinkedIn, Instagram, X, WhatsApp), live HTML mock-ups of post templates, content pillars and mix, caption formula, hashtag rules, posting cadence.
 9. **Ad guidelines**: principles, specs and character limits for LinkedIn, Meta and Google, copy formulas, a CTA library, mock ads, rules for making claims, do and don't.
 10. **Marketing guidelines**: messaging hierarchy, industry messaging matrix, channel playbook, funnel, cold email and WhatsApp rules, case study format, KPIs, pre-publish checklist.
 11. **Downloads**: every logo as SVG and PNG (with a choice of size), a full ZIP and design tokens as CSS and JSON.

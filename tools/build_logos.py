@@ -4,7 +4,8 @@ Geometry was measured from the supplied 616x616 master artwork. Every diagonal
 runs at 2 units across for 3 units down, the angle used throughout the identity.
 
 Usage: python3 tools/build_logos.py
-Needs tools/wordmark.json (outlined Outfit glyphs) next to this script.
+Needs tools/wordmark.json ("FASTEX MEDIA" outlined in Inter 700, 0.025em tracking).
+Optional: resvg_py, to render the cropped-mark PNGs (kept on disk once rendered).
 """
 import base64
 import json
@@ -38,37 +39,33 @@ glyphs = json.loads((ROOT / "tools" / "wordmark.json").read_text())
 
 
 def wordmark(color, scale, x, baseline):
-    fastex_d, fastex_w = glyphs["semibold"]["FASTEX"]
-    media_d, _ = glyphs["medium"]["MEDIA"]
-    media_x = fastex_w + 300  # word space
-    return (f'<g fill="{color}" transform="translate({x} {baseline}) scale({scale})">'
-            f'<path d="{fastex_d}"/><path transform="translate({media_x} 0)" d="{media_d}"/></g>')
-
-
-def word_width(scale):
-    return (glyphs["semibold"]["FASTEX"][1] + 300 + glyphs["medium"]["MEDIA"][1]) * scale
+    return (f'<g fill="{color}" transform="translate({x:.2f} {baseline:.2f}) scale({scale:.5f})">'
+            f'<path d="{glyphs["d"]}"/></g>')
 
 
 mx, my, mw, mh = MARK_BOX
 tight = f"{mx} {my} {mw} {mh}"
+CAP = glyphs["capHeight"] / glyphs["upm"]  # cap height per unit of font size
 
 
 def horizontal(fg):
-    s = 122 / 703  # cap height = 40% of mark height
-    gap = 90
-    w = mw + gap + word_width(s)
+    # Social/ads spec: 62 px mark, 32 px Inter 700 wordmark, 20 px gap, centred vertically.
+    size = mh * 32 / 62
+    s = size / glyphs["upm"]
+    gap = mh * 20 / 62
+    w = mw + gap + glyphs["width"] * s
     body = (f'<g transform="translate({-mx} {-my})">{mark_paths(fg, ORANGE)}</g>'
-            + wordmark(fg, round(s, 5), mw + gap, mh / 2 + 61))
+            + wordmark(fg, s, mw + gap, mh / 2 + CAP * size / 2))
     return svg(f"0 0 {w:.0f} {mh}", body, "Fastex Media")
 
 
 def stacked(fg):
-    s = 0.115
-    w = word_width(s)
-    cap = 703 * s
+    w = mw * 2.6
+    s = w / glyphs["width"]
+    cap = CAP * s * glyphs["upm"]
     body = (f'<g transform="translate({(w - mw) / 2 - mx:.2f} {-my})">{mark_paths(fg, ORANGE)}</g>'
             + wordmark(fg, s, 0, mh + 70 + cap))
-    return svg(f"0 0 {w:.0f} {mh + 70 + cap + 4:.0f}", body, "Fastex Media")
+    return svg(f"0 0 {w:.0f} {mh + 70 + cap + 2:.0f}", body, "Fastex Media")
 
 
 LOGOS = [
@@ -102,6 +99,27 @@ out_dir.mkdir(parents=True, exist_ok=True)
 for lid, _, _, s, _ in LOGOS:
     (out_dir / f"{lid}.svg").write_text(s)
 
+# Cropped marks for social posts and ads: the FX glyph only, no disc, no padding.
+CROPPED = {
+    "FX-mark-cropped-for-light-bg": svg(tight, mark_paths(INK, ORANGE), "Fastex Media mark"),
+    "FX-mark-cropped-for-dark-bg": svg(tight, mark_paths(WHITE, ORANGE), "Fastex Media mark"),
+}
+cropped = {}
+for name, sv in CROPPED.items():
+    (out_dir / f"{name}.svg").write_text(sv)
+    png = out_dir / f"{name}.png"
+    try:
+        import resvg_py
+        h = 620  # 10x the 62 px spec on a 1080 x 1350 post
+        w = round(h * mw / mh)
+        data = bytes(resvg_py.svg_to_bytes(svg_string=sv.replace("<svg ", f'<svg width="{w}" height="{h}" ', 1)))
+        png.write_bytes(data)
+    except ImportError:
+        pass
+    if png.exists():
+        cropped[f"{name}.png"] = base64.b64encode(png.read_bytes()).decode()
+    cropped[f"{name}.svg"] = sv
+
 originals = {}
 for name in ("fx-mark-light.png", "fx-mark-dark-badge.png"):
     p = ROOT / "assets" / "original" / name
@@ -115,6 +133,7 @@ for name in ("Master_Social_Media_Canvas_Sizes.docx",):
         docs[name] = base64.b64encode(p.read_bytes()).decode()
 
 data = {
+    "cropped": cropped,
     "docs": docs,
     "logos": [dict(id=i, name=n, use=u, svg=s, bg=b) for i, n, u, s, b in LOGOS],
     "originals": originals,
